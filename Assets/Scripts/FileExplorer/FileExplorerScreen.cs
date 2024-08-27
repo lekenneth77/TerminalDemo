@@ -19,11 +19,18 @@ public class FileExplorerScreen : MonoBehaviour
             Buttons[i].onClick.AddListener(() => HandleButtonClick(id));
         }
         backButton.onClick.AddListener(HandleBackButton);
+        if (!prevScreen) {
+            backButton.enabled = false;
+        }
     }
 
     public void OnEnable() {
         if (_currentlyActiveButton != -1) {Buttons[_currentlyActiveButton].GetComponent<Image>().color = _transparentColor;}
         _currentlyActiveButton = -1;
+
+        if (!prevScreen) {
+            backButton.enabled = false;
+        }
     }
 
     private void HandleButtonClick(int id) {
