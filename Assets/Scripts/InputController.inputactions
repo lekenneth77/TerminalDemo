@@ -1,0 +1,34 @@
+{
+    "name": "InputController",
+    "maps": [
+        {
+            "name": "Keyboard",
+            "id": "1382c923-cde1-4f82-8c9a-d2470f4b2fb3",
+            "actions": [
+                {
+                    "name": "KeyboardPress",
+                    "type": "Value",
+                    "id": "7abcdd7e-f12f-4953-ade7-bd5e1fe7eb21",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "daf731d2-bb9d-4b46-85c5-b21598e90a35",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KeyboardPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
