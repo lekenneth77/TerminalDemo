@@ -18,6 +18,7 @@ public class FileExplorerScreen : MonoBehaviour
             int id = i;
             Buttons[i].onClick.AddListener(() => HandleButtonClick(id));
         }
+        backButton.onClick.AddListener(HandleBackButton);
     }
 
     public void OnEnable() {
@@ -25,7 +26,7 @@ public class FileExplorerScreen : MonoBehaviour
         _currentlyActiveButton = -1;
     }
 
-    public void HandleButtonClick(int id) {
+    private void HandleButtonClick(int id) {
         if (_currentlyActiveButton == id) {
             //activate that button!
             Buttons[id].GetComponent<Image>().color = _transparentColor;
@@ -41,5 +42,12 @@ public class FileExplorerScreen : MonoBehaviour
             _currentlyActiveButton = id;
             Buttons[id].GetComponent<Image>().color = _highlightColor;
         }
+    }
+
+    public void HandleBackButton() {
+        if (!prevScreen) {return;}
+        GameController.Get.FileExplorer.ShowNewScreen(prevScreen.GetComponent<FileExplorerScreen>());
+        if (_currentlyActiveButton != -1) {Buttons[_currentlyActiveButton].GetComponent<Image>().color = _transparentColor;}
+        _currentlyActiveButton = -1;
     }
 }
