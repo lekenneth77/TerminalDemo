@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
     public static GameController Get {get; private set;}
     public FileSystem Filesys;
     public TerminalTextHandler Terminal;
+    public FileExplorerManager FileExplorer;
+    public Transform PopupContainer;
 
     void Awake()
     {
