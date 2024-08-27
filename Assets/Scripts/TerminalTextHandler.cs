@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.IO.Compression;
+using System;
 
 public enum ErrorMessageType {
     UnrecognizedCommand,
@@ -15,19 +16,22 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
 {
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private ScrollRect _scrollRect;
-    private string _currentPath = "C:\\Users\\you > |";
+    private string _currentPath = "";
     private string _command = "";
     private InputController ic;
     
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        _text.text = _currentPath;
+        _text.text = "";
         ic = new InputController();
         ic.Keyboard.AddCallbacks(this);
-        ic.Keyboard.Enable();
+    }
+
+    public void Init(string path) {
+        _text.text = path + "> |";
+        _currentPath = _text.text;
         ResizeTextbox();
+        ic.Keyboard.Enable();
     }
 
     public void OnDestroy()
@@ -88,14 +92,21 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         }
     }
 
-    public void SetCurrentPath() {
-
+    public void SetCurrentPath(string p) {
+        _currentPath = p + "> |";
+        _text.text += "\n" + _currentPath;
+        ResizeTextbox();
     }
 
     public void DisplayMessage(string message) {
         _text.text += '\n';
         _text.text += message + '\n';
         _text.text += _currentPath;
+        ResizeTextbox();
+    }
+
+    public void ClearTerminal() {
+        _text.text = _currentPath;
         ResizeTextbox();
     }
 
@@ -117,8 +128,11 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
     }
 
     private List<string> ParseCommand(string str, out string cmd) {
+        //convert all forward slashes to backslashes
+        str = str.Replace('/', '\\');
         List<string> ls = new List<string>(str.Split(' '));
         cmd = ls[0];
+        ls.RemoveAt(0);
         return ls;
     }
 
