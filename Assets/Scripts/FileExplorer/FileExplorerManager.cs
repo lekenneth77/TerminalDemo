@@ -9,7 +9,8 @@ public class FileExplorerManager : MonoBehaviour
     public FileExplorerScreen CurrentScreen;
     public List<Button> ShortcutButtons;
     public List<FileExplorerScreen> ShortcutScreens;
-
+    [SerializeField] private GameObject _vacuum;
+    
     public void Awake() {
         for (int i = 0; i < ShortcutButtons.Count; i++) {
             int id = i;
@@ -17,6 +18,10 @@ public class FileExplorerManager : MonoBehaviour
             ShortcutButtons[i].onClick.AddListener(() => ShowNewScreen(screen));
         }
         CurrentScreen.gameObject.SetActive(true);
+    }
+
+    public void SetVacuumView(bool view) {
+        _vacuum.SetActive(view);
     }
 
     public void ShowNewScreen(FileExplorerScreen newScreen) {

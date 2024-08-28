@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,6 +27,10 @@ public class FileSystem : MonoBehaviour
 {
     private INode _root;
     private INode _currentNode;
+    private bool _guided;
+    public event Action CorrectCMDReceived;
+    public event Action IncorrectCMDReceived;
+    private TerminalTextHandler terminal;
 
     void Awake()
     {
@@ -35,14 +40,20 @@ public class FileSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameController.Get.Terminal.Init(_currentNode.path);
+        terminal = GameController.Get.Terminal;
+        terminal.Init(_currentNode.path);
+    }
+
+    
+    public void SetGuidedMode(bool isGuided) {
+        _guided = isGuided;
     }
 
     public void ReceiveCommand(string command, List<string> args) {
         switch (command) {
             case "cd":
             if (args.Count != 1) {
-                GameController.Get.Terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
                 break;
             }
             ChangeDirectory(args[0]);
@@ -50,7 +61,7 @@ public class FileSystem : MonoBehaviour
 
             case "ls":
             if (args.Count != 0) {
-                GameController.Get.Terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
                 break;
             }
             List();
@@ -58,7 +69,7 @@ public class FileSystem : MonoBehaviour
 
             case "pwd":
             if (args.Count != 0) {
-                GameController.Get.Terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
                 break;
             }
             PrintWorkingDirectory();
@@ -66,14 +77,22 @@ public class FileSystem : MonoBehaviour
 
             case "clear":
             if (args.Count != 0) {
-                GameController.Get.Terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
                 break;
             }
-            GameController.Get.Terminal.ClearTerminal();
+            if (_guided) {
+                IncorrectCMDReceived?.Invoke();
+                return;
+            }
+            terminal.ClearTerminal();
             break;
 
             default:
-            GameController.Get.Terminal.DisplayError(ErrorMessageType.UnrecognizedCommand, command);
+            if (_guided) {
+                IncorrectCMDReceived?.Invoke();
+                return;
+            }
+            terminal.DisplayError(ErrorMessageType.UnrecognizedCommand, command);
             break;
         }
     }
@@ -81,22 +100,31 @@ public class FileSystem : MonoBehaviour
     //changes directory to given path
     private void ChangeDirectory(string path) {
         if (path.Length == 0) {
-            GameController.Get.Terminal.DisplayError(ErrorMessageType.PathNotFound, path);
+            terminal.DisplayError(ErrorMessageType.PathNotFound, path);
             return;
+        }
+        if (_guided) {
+            if (GameController.Get.Dialogue.CheckIfCorrect(CMDType.CD, path)) {
+                CorrectCMDReceived?.Invoke();
+            } else {
+                IncorrectCMDReceived?.Invoke();
+                return;
+            }  
         }
 
         bool isAbsolute = path[0] == '\\';
         INode startingNode = isAbsolute ? _root : _currentNode;
+        int startingID = isAbsolute ? 1 : 0;
         if (isAbsolute) {
-            path.Substring(1, path.Length - 1); //remove that first backslash
+            path = path.Substring(1, path.Length - 1); //remove that first backslash
         }
         string[] dirs = path.Split('\\');
-        INode result = CDHelper(startingNode, dirs[dirs.Length - 1], dirs, 0);
+        INode result = CDHelper(startingNode, dirs[dirs.Length - 1], dirs, startingID);
         if (result == null) {
-            GameController.Get.Terminal.DisplayError(ErrorMessageType.PathNotFound, path);
+            terminal.DisplayError(ErrorMessageType.PathNotFound, path);
         } else {
             _currentNode = result;
-            GameController.Get.Terminal.SetCurrentPath(_currentNode.path);
+            terminal.SetCurrentPath(_currentNode.path);
 
         }
     }
@@ -134,19 +162,45 @@ public class FileSystem : MonoBehaviour
         return null;
     }
 
+    public void ForceCD(string absolutePath) {
+        absolutePath = absolutePath.Substring(1, absolutePath.Length - 1); //remove that first backslash
+        string[] dirs = absolutePath.Split('\\');
+        INode result = CDHelper(_root, dirs[dirs.Length - 1], dirs, 1);
+        _currentNode = result;
+        terminal.SetCurrentPath(_currentNode.path);
+    }
+
     //lists out the current directory's elements
     private void List() {
+        if (_guided) {
+            if (GameController.Get.Dialogue.CheckIfCorrect(CMDType.LS, "")) {
+                CorrectCMDReceived?.Invoke();
+            } else {
+                IncorrectCMDReceived?.Invoke();
+                return;
+            }  
+        }
+
         List<INode> children = _currentNode.children;
         string resultingList = "";
         foreach (INode node in children) {
             resultingList += node.name + "\n";
         }
-        GameController.Get.Terminal.DisplayMessage(resultingList);
+        terminal.DisplayMessage(resultingList);
     }
 
     //prints current working directory
     private void PrintWorkingDirectory() {
-        GameController.Get.Terminal.DisplayMessage("\n" + _currentNode.path + "\n");
+        if (_guided) {
+            if (GameController.Get.Dialogue.CheckIfCorrect(CMDType.PWD, "")) {
+                CorrectCMDReceived?.Invoke();
+            } else {
+                IncorrectCMDReceived?.Invoke();
+                return;
+            }  
+        }
+
+        terminal.DisplayMessage("\n" + _currentNode.path + "\n");
     }
     private void CreateFilesys() {
         _root = new INode();

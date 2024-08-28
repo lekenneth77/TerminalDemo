@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
-using System.IO.Compression;
 using System;
 
 public enum ErrorMessageType {
@@ -12,13 +11,23 @@ public enum ErrorMessageType {
     InvalidNumberOfArgs
 }
 
+public enum CMDType {
+    CD,
+    PWD,
+    LS,
+    CLEAR,
+    UNKNOWN
+}
+
 public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActions
 {
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private ScrollRect _scrollRect;
+    [SerializeField] private GameObject _vacuum;
     private string _currentPath = "";
     private string _command = "";
     private InputController ic;
+
     
     void Awake()
     {
@@ -39,9 +48,13 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         ic.Dispose();
     }
 
+    public void SetVacuumView(bool view) {
+        _vacuum.SetActive(view);
+    }
+
     public void OnKeyboardPress(InputAction.CallbackContext context)
     {
-        if (Input.inputString == "") {return;}
+        if (Input.inputString == "" || _vacuum.activeInHierarchy) {return;}
      
         if (context.performed) {
             char key = Input.inputString[0];
@@ -110,6 +123,12 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         ResizeTextbox();
     }
 
+    public void GoToNextLine() {
+        _command = "";
+        _text.text += "\n" + _currentPath;
+        ResizeTextbox();
+    }
+
     private string PopBack(string str) {
         return str.Substring(0, str.Length - 1);
     }
@@ -142,6 +161,48 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         float textWidth = _text.transform.parent.GetComponent<RectTransform>().sizeDelta.x;
         _text.transform.parent.GetComponent<RectTransform>().sizeDelta = new Vector2(textWidth, textHeight);
         _scrollRect.normalizedPosition = Vector2.zero;
+    }
+
+    public CMDType TranslateCMDType(string cmd) {
+        TerminalType type = GameController.Get.TerminalType;
+        if (type == TerminalType.Windows || type == TerminalType.Mac) {
+            switch(cmd) {
+                case "cd":
+                return CMDType.CD;
+                
+                case "ls":
+                return CMDType.LS;
+
+                case "pwd":
+                return CMDType.PWD;
+
+                case "clear":
+                return CMDType.CLEAR;
+
+                default:
+                return CMDType.UNKNOWN;
+            }
+        } else {
+            switch(cmd) {
+                case "cd":
+                return CMDType.CD;
+                
+                case "dir":
+                return CMDType.LS;
+
+                //TODO NEED TO HANDLE THE STUPID THING WITH COMMAND PROMPT WHERE
+                //CD EMPTY IS PWD
+
+                // case "cd":
+                // return CMDType.PWD;
+
+                case "cls":
+                return CMDType.CLEAR;
+
+                default:
+                return CMDType.UNKNOWN;
+            }
+        }
     }
 
 }
