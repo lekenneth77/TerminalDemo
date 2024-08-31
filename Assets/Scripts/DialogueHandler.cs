@@ -3,18 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public enum AdvanceDialogueType {
-Auto,
-Button,
-Event
-};
 
 [Serializable]
 public struct Dialogue {
-    public AdvanceDialogueType type;
+    public bool isEvent;
     public string text;
     public Sprite portrait;
     public string hintText;
@@ -30,17 +25,18 @@ public class DialogueHandler : MonoBehaviour
     [SerializeField] private List<Dialogue> _dialogues;
     [SerializeField] private Button _advanceButton;
     [SerializeField] private Image _portraitImg;
+    // [SerializeField] private Toggle _autoToggle;
     private int _currDialogueIndex = 0;
-    private float LETTER_DELAY = 0.035f;
+    private float LETTER_DELAY = 0.03f;
     private float AUTO_DELAY = 1f;
-    private const float FADE_IN = 1f;
-    private const float FADE_OUT = 1f;
     private const int FAILS_MAX = 2;
+    private bool auto = false;
     private CMDType _tgtCmd;
     private string _tgtPath;
     private int numFails = 0;
     TerminalTextHandler terminal;
     FileSystem filesys;
+    public event Action<int> OnDialogueAdvance;
     
     // Start is called before the first frame update
     void Start()
@@ -49,14 +45,15 @@ public class DialogueHandler : MonoBehaviour
         filesys = GameController.Get.Filesys;
         filesys.CorrectCMDReceived += DisplayCorrectDialogue;
         filesys.IncorrectCMDReceived += DisplayIncorrectDialogue;
+        // _autoToggle.onValueChanged.AddListener((bool enabled) => {
+        //     auto = enabled;
+        // });
 
         _advanceButton.onClick.AddListener(OnAdvanceButtonClicked);
         _advanceButton.gameObject.SetActive(false);
         _textField.text = "";
         _currDialogueIndex = 0;
-        StartDialogue();
     }
-
     public void OnDestroy() {
         filesys.CorrectCMDReceived -= DisplayCorrectDialogue;
         filesys.IncorrectCMDReceived -= DisplayIncorrectDialogue;
@@ -64,22 +61,17 @@ public class DialogueHandler : MonoBehaviour
 
     public void StartDialogue()
     {
-        _container.alpha = 0;
-        _container.gameObject.SetActive(true);
-        var sequence = DOTween.Sequence();
-        sequence.Append(_container.DOFade(1, FADE_IN));
-        sequence.AppendInterval(0.25f);
-        sequence.AppendCallback(NextDialogue);
-        sequence.Play();        
+        NextDialogue();        
     }
 
     public void NextDialogue()
     {
         if (_currDialogueIndex < _dialogues.Count) {
             StopAllCoroutines();
+            OnDialogueAdvance?.Invoke(_currDialogueIndex);
             StartCoroutine("DisplayCurrentDialogue");
         } else {
-            DismissDialogue();
+            SceneManager.LoadSceneAsync("CH" + (GameController.Get.CurrentCH + 1));
         }
     }
 
@@ -89,7 +81,7 @@ public class DialogueHandler : MonoBehaviour
         Dialogue currDialogue = _dialogues[_currDialogueIndex];
         _portraitImg.sprite = currDialogue.portrait;
         //TODO need to disable terminal when dialogue is typing
-        if (currDialogue.type == AdvanceDialogueType.Event && numFails == 0) {
+        if (currDialogue.isEvent && numFails == 0) {
             terminal.SetVacuumView(true);
             if (currDialogue.startingPath.Length > 0) {
                 filesys.ForceCD(currDialogue.startingPath);
@@ -101,34 +93,57 @@ public class DialogueHandler : MonoBehaviour
         if (numFails >= FAILS_MAX && currDialogue.hintText.Length > 0) {
             currDialogueText += "\n" + currDialogue.hintText;
         }
-        for (int i = 0; i < currDialogueText.Length; i++) {
-            _textField.text += currDialogueText[i];
-            yield return new WaitForSeconds(LETTER_DELAY);
-        }        
         
-        switch (currDialogue.type) {
-            case AdvanceDialogueType.Auto:
-            _currDialogueIndex++;
-            yield return new WaitForSeconds(AUTO_DELAY);
-            NextDialogue();
-            break;
-            case AdvanceDialogueType.Button:
-            _currDialogueIndex++;
-            _advanceButton.gameObject.SetActive(true);
-            break;
-            case AdvanceDialogueType.Event:
+        bool specialText = false;
+        for (int i = 0; i < currDialogueText.Length; i++) {
+            if (currDialogueText[i] == '[') {
+                _textField.text += "<color=blue>";
+                ++i;
+                specialText = true;
+            } else if (currDialogueText[i] == ']') {
+                _textField.text += "</color>";
+                ++i;
+                specialText = false;
+            } else if (currDialogueText[i] == '(') {
+                _textField.text += "<color=red>";
+                ++i;
+                specialText = true;
+            } else if (currDialogueText[i] == ')') {
+                _textField.text += "</color>";
+                ++i;
+                specialText = false;
+            } else if (currDialogueText[i] == '{') {
+                _textField.text += "<color=orange>";
+                ++i;
+                specialText = true;
+            } else if (currDialogueText[i] == '}') {
+                _textField.text += "</color>";
+                ++i;
+                specialText = false;
+            } 
+            _textField.text += currDialogueText[i];
+            float delay = specialText ? 0.005f : LETTER_DELAY;
+            yield return new WaitForSeconds(delay);
+        }        
+
+        if (currDialogue.isEvent) {
             terminal.SetVacuumView(false);
             filesys.SetGuidedMode(true);
             _tgtCmd = currDialogue.cmd;
             _tgtPath = currDialogue.tgtPath;
-            break;
-            default:
-            break;
+        } else if (auto) {
+            _currDialogueIndex++;
+            yield return new WaitForSeconds(AUTO_DELAY);
+            NextDialogue();
+        } else {
+            _currDialogueIndex++;
+            _advanceButton.gameObject.SetActive(true);
         }
     }
 
     private void DisplayCorrectDialogue() {
         filesys.SetGuidedMode(false);
+        terminal.SetVacuumView(true);
         StopAllCoroutines();
         numFails = 0;
         _currDialogueIndex++;
@@ -168,18 +183,21 @@ public class DialogueHandler : MonoBehaviour
 
     private void OnAdvanceButtonClicked() {
         NextDialogue();
+        _advanceButton.interactable = false;
+        _advanceButton.interactable = true;
+
         _advanceButton.gameObject.SetActive(false);
     }
 
-    public void DismissDialogue()
-    {
-        _container.alpha = 1;
-        var sequence = DOTween.Sequence();
-        sequence.Append(_container.DOFade(0, FADE_OUT));
-        sequence.AppendInterval(0.25f);
-        sequence.AppendCallback(() => _container.gameObject.SetActive(false));
-        sequence.Play(); 
-    }
+    // public void DismissDialogue()
+    // {
+    //     _container.alpha = 1;
+    //     var sequence = DOTween.Sequence();
+    //     sequence.Append(_container.DOFade(0, FADE_OUT));
+    //     sequence.AppendInterval(0.25f);
+    //     sequence.AppendCallback(() => _container.gameObject.SetActive(false));
+    //     sequence.Play(); 
+    // }
 
     public bool CheckIfCorrect(CMDType type, string path) {
         if (type == _tgtCmd && path == _tgtPath) {

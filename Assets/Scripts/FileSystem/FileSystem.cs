@@ -81,16 +81,23 @@ public class FileSystem : MonoBehaviour
                 break;
             }
             if (_guided) {
-                IncorrectCMDReceived?.Invoke();
-                return;
+                if (GameController.Get.Dialogue.CheckIfCorrect(CMDType.CLEAR, "")) {
+                    CorrectCMDReceived?.Invoke();
+                } else {
+                    IncorrectCMDReceived?.Invoke();
+                }
             }
             terminal.ClearTerminal();
             break;
 
             default:
             if (_guided) {
-                IncorrectCMDReceived?.Invoke();
-                return;
+                if (GameController.Get.Dialogue.CheckIfCorrect(CMDType.UNKNOWN, command)) {
+                    CorrectCMDReceived?.Invoke();
+                } else {
+                    IncorrectCMDReceived?.Invoke();
+                    return;
+                }
             }
             terminal.DisplayError(ErrorMessageType.UnrecognizedCommand, command);
             break;

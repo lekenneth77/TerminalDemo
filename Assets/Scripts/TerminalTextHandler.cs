@@ -32,19 +32,24 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
     void Awake()
     {
         _text.text = "";
-        ic = new InputController();
-        ic.Keyboard.AddCallbacks(this);
     }
 
     public void Init(string path) {
         _text.text = path + "> |";
         _currentPath = _text.text;
         ResizeTextbox();
+        ic = new InputController();
+        ic.Keyboard.AddCallbacks(this);
         ic.Keyboard.Enable();
     }
 
-    public void OnDestroy()
+    private void OnDestroy()
     {
+        StopAllCoroutines();
+        ic.Keyboard.RemoveCallbacks(this);
+        ic.Keyboard.Disable();
+        ic.Keyboard.KeyboardPress.Dispose();
+        ic.Disable();
         ic.Dispose();
     }
 
@@ -54,6 +59,7 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
 
     public void OnKeyboardPress(InputAction.CallbackContext context)
     {
+        if (!this) {return;}
         if (Input.inputString == "" || _vacuum.activeInHierarchy) {return;}
      
         if (context.performed) {
