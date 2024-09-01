@@ -79,16 +79,18 @@ public class FileSystem : MonoBehaviour
             case "clear":
             if (args.Count != 0) {
                 terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
+                if (_guided) {IncorrectCMDReceived?.Invoke();}
                 break;
             }
+
             if (_guided) {
-                if (GameController.Get.Dialogue.CheckIfCorrect(CMDType.CLEAR, "")) {
-                    CorrectCMDReceived?.Invoke();
-                } else {
-                    IncorrectCMDReceived?.Invoke();
-                }
+                CorrectCMDReceived?.Invoke();
             }
             terminal.ClearTerminal();
+            break;
+
+            case "python3":
+            //....
             break;
 
             default:
@@ -111,14 +113,6 @@ public class FileSystem : MonoBehaviour
             terminal.DisplayError(ErrorMessageType.PathNotFound, path);
             return;
         }
-        if (_guided) {
-            if (GameController.Get.Dialogue.CheckIfCorrect(CMDType.CD, path)) {
-                CorrectCMDReceived?.Invoke();
-            } else {
-                IncorrectCMDReceived?.Invoke();
-                return;
-            }  
-        }
 
         bool isAbsolute = path[0] == '\\';
         INode startingNode = isAbsolute ? _root : _currentNode;
@@ -127,15 +121,26 @@ public class FileSystem : MonoBehaviour
         }
         string[] dirs = path.Split('\\');
         INode result = CDHelper(startingNode, dirs[dirs.Length - 1], dirs, 0);
+        
         if (result == null) {
             terminal.DisplayError(ErrorMessageType.PathNotFound, path);
         } else if (result.file) {
             terminal.DisplayError(ErrorMessageType.FileNotDirectory, path);
         } else {
+            if (_guided) {
+                if (GameController.Get.Dialogue.CheckIfCorrect(CMDType.CD, result.name)) {
+                    CorrectCMDReceived?.Invoke();
+                } else {
+                    IncorrectCMDReceived?.Invoke(); return;
+                }
+            }
+
             _currentNode = result;
             terminal.SetCurrentPath(_currentNode.path);
-
+            return;
         }
+
+        if (_guided) { IncorrectCMDReceived?.Invoke();}
     }
 
     private INode CDHelper(INode curNode, string target, string[] dirs, int index) {
@@ -174,7 +179,7 @@ public class FileSystem : MonoBehaviour
     public void ForceCD(string absolutePath) {
         absolutePath = absolutePath.Substring(1, absolutePath.Length - 1); //remove that first backslash
         string[] dirs = absolutePath.Split('\\');
-        INode result = CDHelper(_root, dirs[dirs.Length - 1], dirs, 1);
+        INode result = CDHelper(_root, dirs[dirs.Length - 1], dirs, 0);
         _currentNode = result;
         terminal.SetCurrentPath(_currentNode.path);
     }

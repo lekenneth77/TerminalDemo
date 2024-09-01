@@ -18,6 +18,8 @@ public struct Dialogue {
     public CMDType cmd;
     public string tgtPath;
     public string startingPath;
+    public string tgtINodeName;
+    public string redirectTgt;
 }
 
 public class DialogueHandler : MonoBehaviour
@@ -35,7 +37,7 @@ public class DialogueHandler : MonoBehaviour
     private const int FAILS_MAX = 2;
     private bool auto = false;
     private CMDType _tgtCmd;
-    private string _tgtPath;
+    private string _tgtINode;
     private int numFails = 0;
     TerminalTextHandler terminal;
     FileSystem filesys;
@@ -136,7 +138,7 @@ public class DialogueHandler : MonoBehaviour
             terminal.SetVacuumView(false);
             filesys.SetGuidedMode(true);
             _tgtCmd = currDialogue.cmd;
-            _tgtPath = currDialogue.tgtPath;
+            _tgtINode = currDialogue.tgtINodeName;
         } else if (auto) {
             _currDialogueIndex++;
             yield return new WaitForSeconds(AUTO_DELAY);
@@ -205,8 +207,8 @@ public class DialogueHandler : MonoBehaviour
     //     sequence.Play(); 
     // }
 
-    public bool CheckIfCorrect(CMDType type, string path) {
-        if (type == _tgtCmd && path == _tgtPath) {
+    public bool CheckIfCorrect(CMDType type, string inodeName, string redirectTgtName = "") {
+        if (type == _tgtCmd && inodeName == _tgtINode) {
             return true;
         } else {
             return false;
