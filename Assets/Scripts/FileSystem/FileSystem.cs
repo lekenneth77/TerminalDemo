@@ -227,10 +227,6 @@ public class FileSystem : MonoBehaviour
         docs.Init("Documents");
         username.AddChild(docs);
 
-        INode dls = new INode();
-        dls.Init("Downloads");
-        username.AddChild(dls);
-
         INode termDemo = new INode();
         termDemo.Init("TerminalDemo");
         docs.AddChild(termDemo);
@@ -238,6 +234,22 @@ public class FileSystem : MonoBehaviour
         INode pyScripts = new INode();
         pyScripts.Init("PythonScripts");
         docs.AddChild(pyScripts);
+
+        INode moneyPy = new INode();
+        moneyPy.Init("money.py");
+        pyScripts.AddChild(moneyPy);
+
+        INode reporttxt = new INode();
+        reporttxt.Init("report.txt");
+        pyScripts.AddChild(reporttxt);
+
+        INode daystxt = new INode();
+        daystxt.Init("days.txt");
+        pyScripts.AddChild(daystxt);
+
+        INode dls = new INode();
+        dls.Init("Downloads");
+        username.AddChild(dls);
 
         INode mickey = new INode();
         mickey.Init("test.png", true);
