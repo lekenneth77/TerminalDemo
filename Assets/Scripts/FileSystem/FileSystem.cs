@@ -227,11 +227,15 @@ public class FileSystem : MonoBehaviour
         username.SetParent(users);
 
         INode docs = new INode();
-        path += "\\Documents";
-        docs.Init("Documents", path);
+        docs.Init("Documents", path + "\\Documents");
         username.AddChild(docs);
         docs.SetParent(username);
 
+        INode dls = new INode();
+        dls.Init("Downloads", path + "\\Downloads");
+        username.AddChild(dls);
+        dls.SetParent(username);
+        
         _currentNode = username;
     }
 
