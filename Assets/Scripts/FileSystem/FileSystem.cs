@@ -7,20 +7,21 @@ public class INode {
     public string path;
     public List<INode> children;
     public INode parent;
+    public bool file = false;
 
-    public void Init(string n, string p) {
+    public void Init(string n, bool isFile = false) {
         name = n;
-        path = p;
+        path = "C:";
+        file = isFile;
         children = new List<INode>();
     }
 
     public void AddChild(INode node) {
         children.Add(node);
+        node.parent = this;
+        node.path = path + "\\" + node.name;
     }
 
-    public void SetParent(INode node) {
-        parent = node;
-    }
 }
 
 public class FileSystem : MonoBehaviour
@@ -128,6 +129,8 @@ public class FileSystem : MonoBehaviour
         INode result = CDHelper(startingNode, dirs[dirs.Length - 1], dirs, 0);
         if (result == null) {
             terminal.DisplayError(ErrorMessageType.PathNotFound, path);
+        } else if (result.file) {
+            terminal.DisplayError(ErrorMessageType.FileNotDirectory, path);
         } else {
             _currentNode = result;
             terminal.SetCurrentPath(_currentNode.path);
@@ -210,30 +213,39 @@ public class FileSystem : MonoBehaviour
     }
     private void CreateFilesys() {
         _root = new INode();
-        string path = "C:";
-        _root.Init("C:", path);
+        _root.Init("C:");
         
         INode users = new INode();
-        path += "\\Users";
-        users.Init("Users", path);
+        users.Init("Users");
         _root.AddChild(users);
-        users.SetParent(_root);
 
         INode username = new INode();
-        path += "\\baggu";
-        username.Init("baggu", path);
+        username.Init("baggu");
         users.AddChild(username);
-        username.SetParent(users);
 
         INode docs = new INode();
-        docs.Init("Documents", path + "\\Documents");
+        docs.Init("Documents");
         username.AddChild(docs);
-        docs.SetParent(username);
 
         INode dls = new INode();
-        dls.Init("Downloads", path + "\\Downloads");
+        dls.Init("Downloads");
         username.AddChild(dls);
-        dls.SetParent(username);
+
+        INode termDemo = new INode();
+        termDemo.Init("TerminalDemo");
+        docs.AddChild(termDemo);
+
+        INode pyScripts = new INode();
+        pyScripts.Init("PythonScripts");
+        docs.AddChild(pyScripts);
+
+        INode mickey = new INode();
+        mickey.Init("test.png", true);
+        dls.AddChild(mickey);
+
+        INode drip = new INode();
+        drip.Init("testdrip.png", true);
+        dls.AddChild(drip);
 
         _currentNode = username;
     }

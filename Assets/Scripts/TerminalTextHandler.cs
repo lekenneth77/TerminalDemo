@@ -8,7 +8,8 @@ using System;
 public enum ErrorMessageType {
     UnrecognizedCommand,
     PathNotFound,
-    InvalidNumberOfArgs
+    InvalidNumberOfArgs,
+    FileNotDirectory
 }
 
 public enum CMDType {
@@ -102,6 +103,11 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
 
             case ErrorMessageType.InvalidNumberOfArgs:
             msg = "Invalid Number of args for this command: " + cause;
+            DisplayMessage(msg);
+            break;
+
+            case ErrorMessageType.FileNotDirectory:
+            msg = cause + " is a file, not a directory";
             DisplayMessage(msg);
             break;
 
