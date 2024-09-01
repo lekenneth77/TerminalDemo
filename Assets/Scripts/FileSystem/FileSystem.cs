@@ -121,12 +121,11 @@ public class FileSystem : MonoBehaviour
 
         bool isAbsolute = path[0] == '\\';
         INode startingNode = isAbsolute ? _root : _currentNode;
-        int startingID = isAbsolute ? 1 : 0;
         if (isAbsolute) {
             path = path.Substring(1, path.Length - 1); //remove that first backslash
         }
         string[] dirs = path.Split('\\');
-        INode result = CDHelper(startingNode, dirs[dirs.Length - 1], dirs, startingID);
+        INode result = CDHelper(startingNode, dirs[dirs.Length - 1], dirs, 0);
         if (result == null) {
             terminal.DisplayError(ErrorMessageType.PathNotFound, path);
         } else {
@@ -235,7 +234,7 @@ public class FileSystem : MonoBehaviour
         dls.Init("Downloads", path + "\\Downloads");
         username.AddChild(dls);
         dls.SetParent(username);
-        
+
         _currentNode = username;
     }
 

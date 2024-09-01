@@ -5,11 +5,13 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 
 [Serializable]
 public struct Dialogue {
     public bool isEvent;
+     [TextArea(3, 6)]
     public string text;
     public Sprite portrait;
     public string hintText;
@@ -24,6 +26,7 @@ public class DialogueHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _textField;
     [SerializeField] private List<Dialogue> _dialogues;
     [SerializeField] private Button _advanceButton;
+    [SerializeField] private Button _dialogueTextContainer;
     [SerializeField] private Image _portraitImg;
     // [SerializeField] private Toggle _autoToggle;
     private int _currDialogueIndex = 0;
@@ -37,6 +40,9 @@ public class DialogueHandler : MonoBehaviour
     TerminalTextHandler terminal;
     FileSystem filesys;
     public event Action<int> OnDialogueAdvance;
+    private Dictionary<char, string> specialCharMap = new Dictionary<char, string>();
+    private const string COLOR_TAG_ENDER = "</color>";
+    private bool _skipText = false;
     
     // Start is called before the first frame update
     void Start()
@@ -45,14 +51,19 @@ public class DialogueHandler : MonoBehaviour
         filesys = GameController.Get.Filesys;
         filesys.CorrectCMDReceived += DisplayCorrectDialogue;
         filesys.IncorrectCMDReceived += DisplayIncorrectDialogue;
-        // _autoToggle.onValueChanged.AddListener((bool enabled) => {
-        //     auto = enabled;
-        // });
+
+        _dialogueTextContainer.onClick.AddListener(() => _skipText = true);
 
         _advanceButton.onClick.AddListener(OnAdvanceButtonClicked);
         _advanceButton.gameObject.SetActive(false);
         _textField.text = "";
+        
+        specialCharMap.Add('[', "<color=blue>");
+        specialCharMap.Add('(', "<color=red>");
+        specialCharMap.Add('{', "<color=orange>");
+        
         _currDialogueIndex = 0;
+
     }
     public void OnDestroy() {
         filesys.CorrectCMDReceived -= DisplayCorrectDialogue;
@@ -66,8 +77,8 @@ public class DialogueHandler : MonoBehaviour
 
     public void NextDialogue()
     {
+        StopAllCoroutines();
         if (_currDialogueIndex < _dialogues.Count) {
-            StopAllCoroutines();
             OnDialogueAdvance?.Invoke(_currDialogueIndex);
             StartCoroutine("DisplayCurrentDialogue");
         } else {
@@ -77,13 +88,15 @@ public class DialogueHandler : MonoBehaviour
 
     private IEnumerator DisplayCurrentDialogue()
     {
+        _skipText = false;
         _textField.text = "";
         Dialogue currDialogue = _dialogues[_currDialogueIndex];
         _portraitImg.sprite = currDialogue.portrait;
-        //TODO need to disable terminal when dialogue is typing
+
         if (currDialogue.isEvent && numFails == 0) {
             terminal.SetVacuumView(true);
             if (currDialogue.startingPath.Length > 0) {
+                Debug.Log("Forced Starting Path!");
                 filesys.ForceCD(currDialogue.startingPath);
                 terminal.ClearTerminal();
             }
@@ -96,33 +109,26 @@ public class DialogueHandler : MonoBehaviour
         
         bool specialText = false;
         for (int i = 0; i < currDialogueText.Length; i++) {
-            if (currDialogueText[i] == '[') {
-                _textField.text += "<color=blue>";
-                ++i;
+            char curChar = currDialogueText[i];
+            if (specialCharMap.ContainsKey(curChar)) {
+                _textField.text += specialCharMap[curChar];
                 specialText = true;
-            } else if (currDialogueText[i] == ']') {
-                _textField.text += "</color>";
-                ++i;
+                _textField.text += COLOR_TAG_ENDER;
+            } else if (curChar == ']' || curChar == ')' || curChar == '}') {
                 specialText = false;
-            } else if (currDialogueText[i] == '(') {
-                _textField.text += "<color=red>";
-                ++i;
-                specialText = true;
-            } else if (currDialogueText[i] == ')') {
-                _textField.text += "</color>";
-                ++i;
-                specialText = false;
-            } else if (currDialogueText[i] == '{') {
-                _textField.text += "<color=orange>";
-                ++i;
-                specialText = true;
-            } else if (currDialogueText[i] == '}') {
-                _textField.text += "</color>";
-                ++i;
-                specialText = false;
-            } 
-            _textField.text += currDialogueText[i];
-            float delay = specialText ? 0.005f : LETTER_DELAY;
+            } else {
+                if (specialText) {
+                    _textField.text = _textField.text.Substring(0, _textField.text.Length - COLOR_TAG_ENDER.Length);
+                }
+                
+                _textField.text += currDialogueText[i];
+                
+                if (specialText) {
+                    _textField.text += COLOR_TAG_ENDER;
+                }
+            }
+            
+            float delay = _skipText ? 0 : LETTER_DELAY;
             yield return new WaitForSeconds(delay);
         }        
 

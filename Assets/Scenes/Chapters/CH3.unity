@@ -326,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.size
-      value: 19
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].cmd
@@ -354,9 +354,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[0].text
-      value: "Now that we know what our current working directory is with [pwd] and
-        how to see the contents of it with [ls], let\u2019s learn how to move from
-        one folder to another. "
+      value: "Now that we know what our (current working directory) is with [pwd]
+        and how to see the contents of it with [ls], let\u2019s learn how to move
+        from one folder to another. "
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[10].cmd
@@ -396,32 +396,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[19].cmd
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[1].text
       value: " Let\u2019s say I wanted to move to my {Documents} folder. The {Documents}
-        folder is a subdirectory of my current working directory, {Users}."
+        folder is a subdirectory of my (current working directory), {Users}."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[20].cmd
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[21].cmd
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[22].cmd
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[23].cmd
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[24].cmd
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[2].text
@@ -517,30 +517,110 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[19].text
-      value: 'Hey, that showed an error! What happened? '
+      value: Seems like you have two folders here, a {PythonScripts} folder and a
+        {TerminalDemo} folder.
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[20].text
-      value: 'The terminal only accepts certain keywords and their respective parameters,
-        and we call those [commands].  '
+      value: "Cool, let\u2019s use the (relative path) with [cd] this time. Unlike
+        (absolute paths), the (relative paths) don\u2019t start with the slash. Try
+        typing in [cd TerminalDemo]."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[21].text
-      value: 'Here, try typing in this command: [clear].'
+      value: "Wow that\u2019s a lot easier than typing the (absolute path) out."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[22].text
-      value: 'Woah it did something! '
+      value: "Yep, (relative paths) are great for moving to directories near your
+        (current working directory), while Absolute paths are great for moving to
+        directories that are far away from you.\r"
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[23].text
-      value: Yep, clear is a useful command, it will erase all the previous text
-        and commands and basically reset the view.
+      value: "Now, use [cd] with the (absolute path) to {baggu} to go to that directory.
+        You can use the file explorer if you want to figure out how to get from the
+        {home} directory to {baggu}. Remember absolute paths start with backslash,
+        and that you don\u2019t need to specify the home directory."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[24].text
-      value: "We\u2019ll learn some more important [commands] in our demo. Let\u2019s
-        talk about navigating the terminal next. "
+      value: "Great job. Now use [cd] with the (relative path) to the (Downloads)
+        folder. Remember relative paths DON\u2019T start with backslash."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[25].text
+      value: "Nice, understanding (relative and absolute paths) are really important,
+        so I recommend messing around with your terminal more when you have the time!\r"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[26].text
+      value: A couple more things before we move on from this topic, we know how
+        to go into subdirectories, but how do we go back up to the parent directory?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[27].text
+      value: 'We use the [..] keyword. When you use [..] in your path, then it will
+        go back up to the parent directory. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[28].text
+      value: "Let\u2019s try using it. We\u2019re currently in the {Downloads} folder,
+        but if I wanted to go back into my {baggu} folder, try using this command:
+        [cd ..] .\r"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[29].text
+      value: Awesome,  [cd] to the {Downloads} folder for me.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[30].text
+      value: "Let\u2019s say we wanted to go to my {Documents} directory from my
+        {Downloads} directory, here you could use the (absolute path) to go there,
+        but let\u2019s try using the relative path. You can put the [..] keyword
+        anywhere in your path to really make navigating the terminal easy."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[31].text
+      value: The relative path in words is, go back up to the parent folder {baggu}
+        then go to {Documents}. Try writing the simplest [cd] command to do that.
+        Remember to go back to the parent the path keyword is [..] .
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[32].text
+      value: "Great job, you\u2019re a [cd] pro now. So alongside the [..] path keyword,
+        there is also the [.] keyword."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[33].text
+      value: "The [.] keyword represents the current working directory. It\u2019s
+        not that useful with [cd] but it can be useful when some programs use root
+        as the default starting point, but using the [.] keyword as your starting
+        point is a good way to emulate relative paths."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[34].text
+      value: "So saying something like [cd .] is gonna just move you to the same
+        directory you\u2019re already in.\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[35].text
+      value: " That\u2019s all there is about [cd], make sure to remember your absolute
+        and relative paths and the difference between them! "
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[36].text
+      value: "Let\u2019s move onto the final topic."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[37].text
+      value: The relative path in words is, go back up to the parent folder {baggu}
+        then go to {Documents}. Try writing the [cd] command to do that. Remember
+        to go back to the parent the path keyword is [..] .
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[0].isEvent
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].isEvent
@@ -592,32 +672,140 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[19].tgtPath
-      value: HELLO
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[1].portrait
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[20].tgtPath
-      value: HELLO
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[21].isEvent
+      propertyPath: _dialogues.Array.data[20].isEvent
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[20].tgtPath
+      value: TerminalDemo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[21].isEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[21].tgtPath
-      value: 
+      value: TerminalDemo
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[22].isEvent
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[22].tgtPath
+      value: TerminalDemo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[23].isEvent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[23].tgtPath
+      value: \Users\baggu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[24].isEvent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[24].tgtPath
+      value: Downloads
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[25].isEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[25].tgtPath
+      value: Downloads
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[26].tgtPath
+      value: Downloads
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[27].tgtPath
+      value: Downloads
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[28].isEvent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[28].tgtPath
+      value: ..
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[29].isEvent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[29].tgtPath
+      value: Downloads
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[2].portrait
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[30].isEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[30].tgtPath
+      value: Downloads
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[31].isEvent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[31].tgtPath
+      value: ..\Documents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[32].isEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[32].tgtPath
+      value: ..\Documents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[33].isEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[33].tgtPath
+      value: ..\Documents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[34].tgtPath
+      value: ..\Documents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[35].tgtPath
+      value: ..\Documents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[36].tgtPath
+      value: ..\Documents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[37].isEvent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[37].tgtPath
+      value: ..\Documents
+      objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[3].portrait
       value: 
@@ -703,23 +891,115 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[20].hintText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[20].portrait
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[21].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[22].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[23].portrait
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[24].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[25].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[26].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[27].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[28].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[29].hintText
+      value: The command is [cd Downloads].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[29].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[30].hintText
+      value: The command is [cd Downloads].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[30].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[31].hintText
+      value: The command is [cd ..\Documents].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[31].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[32].hintText
+      value: The command is [cd Downloads].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[32].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[33].hintText
+      value: The command is [cd Downloads].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[33].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[34].hintText
+      value: The command is [cd Downloads].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[34].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[35].hintText
+      value: The command is [cd Downloads].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[35].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[36].hintText
+      value: The command is [cd Downloads].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[36].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[37].hintText
+      value: The command is [cd Downloads].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[37].portrait
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665590031873673, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}

@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour
     private const float TITLE_HOW_LONG = 2f;
     public int CurrentCH = 0;
 
+    public bool Debug = false;
+
     void Awake()
     {
         if (Get) {
@@ -34,6 +36,11 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        if (Debug) {
+            Dialogue.StartDialogue();
+            return;
+        }
+        
         titleFadeIn.alpha = 0;
         var sequence = DOTween.Sequence();
         sequence.AppendInterval(0.5f);
