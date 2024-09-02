@@ -169,7 +169,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6957399
 MonoBehaviour:
@@ -234,7 +234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665588853347472, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2636665588853347472, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_AnchorMax.x
@@ -567,8 +567,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[27].text
-      value: 'We use the [..] keyword. When you use [..] in your path, then it will
-        go back up to the parent directory. '
+      value: 'We use the [..] keyword (double period). When you use [..] in your
+        path, then it will go back up to the parent directory. '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[28].text
@@ -578,7 +578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[29].text
-      value: Awesome,  [cd] to the {Downloads} folder for me.
+      value: Awesome, [cd] back into to the {Downloads} folder for me.
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[30].text
@@ -600,10 +600,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[33].text
-      value: "The [.] keyword represents the (current working directory). It\u2019s
-        not that useful with [cd] but it can be useful when some programs use root
-        as the default starting point, but using the [.] keyword as your starting
-        point is a good way to emulate (relative paths)."
+      value: "The [.] keyword (single period) represents the (current working directory).
+        It\u2019s not that useful with [cd] but it can be useful when some programs
+        use root as the default starting point, but using the [.] keyword as your
+        starting point is a good way to emulate (relative paths)."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[34].text
@@ -1017,6 +1017,70 @@ PrefabInstance:
       propertyPath: _dialogues.Array.data[37].portrait
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[7].startingPath
+      value: \Users\baggu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[7].tgtINodeName
+      value: Documents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[8].startingPath
+      value: \Users\baggu\Documents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[18].startingPath
+      value: \Users\baggu\Documents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[20].startingPath
+      value: \Users\baggu\Documents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[20].tgtINodeName
+      value: TerminalDemo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[23].startingPath
+      value: \Users\baggu\Documents\TerminalDemo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[23].tgtINodeName
+      value: baggu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[24].startingPath
+      value: \Users\baggu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[24].tgtINodeName
+      value: Downloads
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[28].startingPath
+      value: \Users\baggu\Downloads
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[28].tgtINodeName
+      value: baggu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[29].startingPath
+      value: \Users\baggu
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[29].tgtINodeName
+      value: Downloads
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[31].startingPath
+      value: \Users\baggu\Downloads
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[31].tgtINodeName
+      value: Documents
+      objectReference: {fileID: 0}
     - target: {fileID: 2636665590031873673, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1071,7 +1135,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.24846919, g: 0.4325019, b: 0.4433962, a: 0}
+  m_BackGroundColor: {r: 0.32096833, g: 0.4339623, b: 0.32774416, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1119,3 +1183,112 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1761075350
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2292464715827785826, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_Color.b
+      value: 0.32941177
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464715827785826, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.43529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464715827785826, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_Color.r
+      value: 0.32156864
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759501, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_Name
+      value: BackgroundCanvas
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}

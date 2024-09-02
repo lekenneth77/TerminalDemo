@@ -169,7 +169,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6957399
 MonoBehaviour:
@@ -230,7 +230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665588853347472, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2636665588853347472, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_AnchorMax.x
@@ -322,7 +322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.size
-      value: 25
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[0].text
@@ -330,8 +330,12 @@ PrefabInstance:
         But, for his class here it says we should be using VSCode\u2019s terminal.  "
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[12].cmd
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[18].cmd
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[19].cmd
@@ -348,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[21].cmd
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[22].cmd
@@ -360,6 +364,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[24].cmd
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[25].cmd
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
@@ -381,7 +389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[6].text
-      value: 'A directory is just another name to a folder. Just like the folders
+      value: 'A directory is just another name for a folder. Just like the folders
         in your File Explorer. '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
@@ -407,71 +415,77 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[11].text
-      value: "Here, you can see in my File Explorer, that it\u2019s currently in
-        a directory called, {baggu}, which is my user folder. Do you know how to
-        get to that folder? "
+      value: "Here, we can use my File Explorer,  it\u2019s currently in a directory
+        called, {baggu}, which is my user folder. Do you know how to get to that
+        folder? "
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[12].text
+      value: You can even step through my file explorer if you would like. I set
+        up shortcuts to my Home directory, my user directory, and my Documents and
+        Downloads directories.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[13].text
       value: ' I guess you would start from the {Home} directory, then go to {Users},
         and then double click on your username folder right? '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[13].text
+      propertyPath: _dialogues.Array.data[14].text
       value: "That\u2019s exactly right. Now look at the terminal again, do you see
         anything peculiar now? "
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[14].text
+      propertyPath: _dialogues.Array.data[15].text
       value: ' ..Woah, I see the {Users} and {baggu} folders! Is the {C:} your home
         directory?  '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[15].text
+      propertyPath: _dialogues.Array.data[16].text
       value: "That\u2019s right, {C:} represents the {Home} or \u2018{Root}\u2019
         directory. Every folder and file has a path from the {Root} directory to
         note where it lives.  "
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[16].text
+      propertyPath: _dialogues.Array.data[17].text
       value: "So the {baggu} folder, its path is {C:} then {Users} then {baggu}.
         We\u2019ll talk more about paths later but it\u2019s important to understand
         that\u2019s how your files are accessed by the machine. They start at the
         {Root}, then go down the path to a file/folder. "
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[17].text
+      propertyPath: _dialogues.Array.data[18].text
       value: 'I see! So my terminal is really just like the File Explorer. '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[18].text
+      propertyPath: _dialogues.Array.data[19].text
       value: 'Yep! To interact with the terminal, try typing in this: [Hello World!]
         and press Enter.'
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[19].text
+      propertyPath: _dialogues.Array.data[20].text
       value: 'Hey, that showed an error! What happened? '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[20].text
+      propertyPath: _dialogues.Array.data[21].text
       value: 'The terminal only accepts certain keywords and their respective parameters,
         and we call those [commands].  '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[21].text
+      propertyPath: _dialogues.Array.data[22].text
       value: 'Here, try typing in this command: [clear].'
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[22].text
+      propertyPath: _dialogues.Array.data[23].text
       value: 'Woah it did something! '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[23].text
-      value: Yep, clear is a useful command, it will erase all the previous text
-        and commands and basically reset the view.
+      propertyPath: _dialogues.Array.data[24].text
+      value: Yep, [clear] is a useful command, it will erase all the previous text
+        and commands from the terminal and basically reset the view.
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[24].text
+      propertyPath: _dialogues.Array.data[25].text
       value: "We\u2019ll learn some more important [commands] in our demo. Let\u2019s
         talk about navigating the terminal next. "
       objectReference: {fileID: 0}
@@ -481,7 +495,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[18].isEvent
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[18].tgtPath
@@ -489,7 +503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[19].isEvent
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[19].tgtPath
@@ -505,7 +519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[21].isEvent
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[21].tgtPath
@@ -513,7 +527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[22].isEvent
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[2].portrait
@@ -558,19 +572,19 @@ PrefabInstance:
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[12].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[13].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[14].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[15].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[16].portrait
       value: 
@@ -578,19 +592,19 @@ PrefabInstance:
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[17].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[18].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[19].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[20].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[21].portrait
       value: 
@@ -598,15 +612,23 @@ PrefabInstance:
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[22].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[23].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[24].portrait
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[25].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[19].tgtINodeName
+      value: Hello
+      objectReference: {fileID: 0}
     - target: {fileID: 2636665590031873673, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -726,3 +748,112 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &876489999
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2292464715827785826, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_Color.b
+      value: 0.44313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464715827785826, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.43137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464715827785826, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_Color.r
+      value: 0.24705882
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759497, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292464716453759501, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}
+      propertyPath: m_Name
+      value: BackgroundCanvas
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb3dd62dd8ae3bc4790ff2674d68d96e, type: 3}

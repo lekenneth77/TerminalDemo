@@ -28,7 +28,6 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
     private string _currentPath = "";
     private string _command = "";
     private InputController ic;
-
     
     void Awake()
     {
@@ -76,6 +75,12 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
                 _text.text = PopBack(_text.text);
                 string cmd;
                 List<string> args = ParseCommand(_command, out cmd);
+                for (int i = 0; i < args.Count; i++) { //get rid of empty args
+                    if (args[i].Length == 0) {
+                        args.RemoveAt(i);
+                        --i;
+                    }
+                }
                 GameController.Get.Filesys.ReceiveCommand(cmd, args);
                 _command = "";
             } else {

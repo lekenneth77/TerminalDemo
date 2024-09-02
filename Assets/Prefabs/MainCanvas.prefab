@@ -353,7 +353,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &2636665588853347474
 MonoBehaviour:
@@ -796,7 +796,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2636665589206235355}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -1313,8 +1313,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fc6f301511522634faf9b6c514108eb0, type: 2}
+  m_sharedMaterial: {fileID: 8117081185464105721, guid: fc6f301511522634faf9b6c514108eb0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3752,7 +3752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7043844639733944270, guid: 97648b021e06cf648bc217ac9b85aac9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 216.9928
       objectReference: {fileID: 0}
     - target: {fileID: 7043844639733944270, guid: 97648b021e06cf648bc217ac9b85aac9, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4238,7 +4238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7043844639733944270, guid: 97648b021e06cf648bc217ac9b85aac9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 160
+      value: 216.99
       objectReference: {fileID: 0}
     - target: {fileID: 7043844639733944270, guid: 97648b021e06cf648bc217ac9b85aac9, type: 3}
       propertyPath: m_SizeDelta.y

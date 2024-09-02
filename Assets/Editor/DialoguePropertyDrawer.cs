@@ -14,7 +14,6 @@ public class DialoguePropertyDrawer : PropertyDrawer
         var portraitProperty = property.FindPropertyRelative("portrait");
         var hintTextProperty = property.FindPropertyRelative("hintText");
         var cmdProperty = property.FindPropertyRelative("cmd");
-        var tgtPathProperty = property.FindPropertyRelative("tgtPath");
         var startingPathProperty = property.FindPropertyRelative("startingPath");
         var tgtINodeName = property.FindPropertyRelative("tgtINodeName");
         var redirectTgt = property.FindPropertyRelative("redirectTgt");
@@ -47,8 +46,6 @@ public class DialoguePropertyDrawer : PropertyDrawer
             currentPos.y += lineHeight + EditorGUIUtility.standardVerticalSpacing;
             EditorGUI.PropertyField(currentPos, hintTextProperty);
             currentPos.y += lineHeight + EditorGUIUtility.standardVerticalSpacing;
-            EditorGUI.PropertyField(currentPos, tgtPathProperty);
-            currentPos.y += lineHeight + EditorGUIUtility.standardVerticalSpacing;
             EditorGUI.PropertyField(currentPos, startingPathProperty);
             currentPos.y += lineHeight + EditorGUIUtility.standardVerticalSpacing;
             EditorGUI.PropertyField(currentPos, tgtINodeName);
@@ -68,7 +65,7 @@ public class DialoguePropertyDrawer : PropertyDrawer
 
         if (isEventProperty.boolValue)
         {
-            height += EditorGUIUtility.singleLineHeight * 6 + EditorGUIUtility.standardVerticalSpacing * 3; // cmd, hintText, tgtPath, startingPath
+            height += EditorGUIUtility.singleLineHeight * 5 + EditorGUIUtility.standardVerticalSpacing * 3; // cmd, hintText, tgtPath, startingPath
         }
 
         return height;

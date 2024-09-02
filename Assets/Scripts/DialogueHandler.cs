@@ -16,7 +16,6 @@ public struct Dialogue {
     public Sprite portrait;
     public string hintText;
     public CMDType cmd;
-    public string tgtPath;
     public string startingPath;
     public string tgtINodeName;
     public string redirectTgt;
@@ -98,7 +97,6 @@ public class DialogueHandler : MonoBehaviour
         if (currDialogue.isEvent && numFails == 0) {
             terminal.SetVacuumView(true);
             if (currDialogue.startingPath.Length > 0) {
-                Debug.Log("Forced Starting Path!");
                 filesys.ForceCD(currDialogue.startingPath);
                 terminal.ClearTerminal();
             }
@@ -179,6 +177,10 @@ public class DialogueHandler : MonoBehaviour
 
             case CMDType.LS:
             incorrText += "it should just be ls, and that's it! No spaces or words after!";
+            break;
+
+            default:
+            incorrText += "type it just like how I'm telling you to.";
             break;
         }
         for (int i = 0; i < incorrText.Length; i++) {

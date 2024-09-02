@@ -181,7 +181,7 @@ public class FileSystem : MonoBehaviour
         string[] dirs = absolutePath.Split('\\');
         INode result = CDHelper(_root, dirs[dirs.Length - 1], dirs, 0);
         _currentNode = result;
-        terminal.SetCurrentPath(_currentNode.path);
+        GameController.Get.Terminal.SetCurrentPath(_currentNode.path);
     }
 
     //lists out the current directory's elements
