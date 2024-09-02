@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CH4Event : MonoBehaviour
 {
-
+    public File reporttxt;
+    public PopupWindow filledReport;
     private int scenario = 0;
     // Start is called before the first frame update
     void Start()
@@ -24,10 +25,11 @@ public class CH4Event : MonoBehaviour
             break;
 
             case 1:
+                reporttxt.popup = filledReport;
             break;
 
             case 2:
-                GameController.Get.Terminal.DisplayMessage("0\n0\n0\n");
+                GameController.Get.Terminal.DisplayMessage("0\n0\n0\n0\n0\n0\n");
             break;
         }
         scenario++;

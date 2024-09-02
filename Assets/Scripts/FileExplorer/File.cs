@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class File : MonoBehaviour
 {
-    [SerializeField] private PopupWindow popup;
+    public PopupWindow popup;
 
     public void ShowPopup()
     {

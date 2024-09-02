@@ -492,9 +492,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[7].text
-      value: Cool right? I don't think that script is accurate but anyway, now that
-        we know how to run a python script with the terminal, we can redirect the
-        output.
+      value: Cool right? It output to the terminal, but I don't think that script
+        is accurate. Anyway, now that we know how to run a python script with the
+        terminal, we can redirect the output.
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[8].text
@@ -1437,6 +1437,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+--- !u!114 &437558483 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2298712085275346774, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+  m_PrefabInstance: {fileID: 437558482}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2718cee0468345b43847902280216f39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &618656608 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2636665588853347487, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
@@ -1454,6 +1465,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52452a750dff5514f8bddccdf8c681be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reporttxt: {fileID: 437558483}
+  filledReport: {fileID: 7113709403271463860, guid: deadb7eb2cc875a45afda5d3485768cd, type: 3}
 --- !u!1 &803013413
 GameObject:
   m_ObjectHideFlags: 0
