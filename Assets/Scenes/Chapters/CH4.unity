@@ -310,7 +310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665588853347477, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: CurrentCH
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2636665588853347487, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_Name
@@ -327,6 +327,10 @@ PrefabInstance:
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.size
       value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[2].cmd
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].cmd
@@ -445,14 +449,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[2].text
-      value: "Alright, so I got a cool python script here called {money.py} that
-        will print out all of my monthly\u2019s earnings from making this game this
-        year, and two text files, one called {report.txt}, and another called {days.txt}
-        ."
+      value: Now let's run [ls].
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[30].cmd
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[31].cmd
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[37].cmd
@@ -460,17 +465,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[3].text
+      value: "Alright, so I got a cool python script here called {money.py} that
+        will print out all of my monthly\u2019s earnings from making this game this
+        year, and two text files, one called {report.txt}, and another called {days.txt}
+        ."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[4].text
       value: " You could simply run the python script in your cool IDE or whatever,
         and then just copy and paste that output into the text file, but that\u2019s
         a lot of work. Imagine if you had output of like a whole bunch of lines or
         that you had to do that for a lot of text files. You don\u2019t wanna do
         that manually."
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[4].text
-      value: "So first, let\u2019s learn how to run the python script in the terminal,
-        and it\u2019s simple, the command is simply [python3 <path>]. Again, the
-        arrows aren\u2019t included."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[5].text
@@ -486,9 +492,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[7].text
-      value: "Cool right? My terminal gave up and didn\u2019t print it out all but
-        it usually would. Alrighty, now that we know how to run a python script with
-        the terminal, we can redirect the output."
+      value: Cool right? I don't think that script is accurate but anyway, now that
+        we know how to run a python script with the terminal, we can redirect the
+        output.
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[8].text
@@ -609,9 +615,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].text
-      value: The (relative path) in words is, go back up to the parent folder {baggu}
-        then go to {Documents}. Try writing the simplest [cd] command to do that.
-        Remember to go back to the parent the path keyword is [..] .
+      value: "So first, let\u2019s learn how to run the python script in the terminal,
+        and it\u2019s simple, the command is simply [python3 <path>]. Again, the
+        arrows aren\u2019t included."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[32].text
@@ -655,7 +661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[2].isEvent
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].isEvent
@@ -803,7 +809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[2].hintText
-      value: 'The command is: [cd Documents\PythonScripts].'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[2].portrait
@@ -819,7 +825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].isEvent
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].tgtPath
@@ -1015,7 +1021,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].hintText
-      value: The command is [cd ..\Documents].
+      value: 'The command is: [cd Documents\PythonScripts].'
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].portrait
@@ -1069,6 +1075,10 @@ PrefabInstance:
       propertyPath: _dialogues.Array.data[37].portrait
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[2].redirectTgt
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[9].redirectTgt
       value: '>report.txt'
@@ -1163,15 +1173,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[2].startingPath
-      value: \Users\baggu
+      value: \Users\baggu\Documents\PythonScripts
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[2].tgtINodeName
-      value: PythonScripts
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[30].redirectTgt
       value: <days.txt
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[31].redirectTgt
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[3].startingPath
@@ -1399,11 +1413,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].startingPath
-      value: \Users\baggu\Downloads
+      value: \Users\baggu
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].tgtINodeName
-      value: Documents
+      value: PythonScripts
       objectReference: {fileID: 0}
     - target: {fileID: 2636665590031873673, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_IsActive
@@ -1423,6 +1437,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+--- !u!1 &618656608 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2636665588853347487, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+  m_PrefabInstance: {fileID: 437558482}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &618656615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618656608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52452a750dff5514f8bddccdf8c681be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &803013413
 GameObject:
   m_ObjectHideFlags: 0

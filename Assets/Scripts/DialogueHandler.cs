@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Linq;
+using UnityEngine.EventSystems;
 
 
 [Serializable]
@@ -37,10 +37,12 @@ public class DialogueHandler : MonoBehaviour
     private bool auto = false;
     private CMDType _tgtCmd;
     private string _tgtINode;
+    private string _redirINode;
     private int numFails = 0;
     TerminalTextHandler terminal;
     FileSystem filesys;
     public event Action<int> OnDialogueAdvance;
+    public event Action PythonSuccess;
     private Dictionary<char, string> specialCharMap = new Dictionary<char, string>();
     private const string COLOR_TAG_ENDER = "</color>";
     private bool _skipText = false;
@@ -53,7 +55,10 @@ public class DialogueHandler : MonoBehaviour
         filesys.CorrectCMDReceived += DisplayCorrectDialogue;
         filesys.IncorrectCMDReceived += DisplayIncorrectDialogue;
 
-        _dialogueTextContainer.onClick.AddListener(() => _skipText = true);
+        _dialogueTextContainer.onClick.AddListener(() => {
+            _skipText = true;
+            _dialogueTextContainer.enabled = false;
+        });
 
         _advanceButton.onClick.AddListener(OnAdvanceButtonClicked);
         _advanceButton.gameObject.SetActive(false);
@@ -84,7 +89,7 @@ public class DialogueHandler : MonoBehaviour
             StartCoroutine("DisplayCurrentDialogue");
         } else {
             int nextCH = GameController.Get.CurrentCH + 1;
-            if (nextCH > 5) {
+            if (nextCH > 6) {
                 //go to title screen?
             } else {
                 SceneManager.LoadSceneAsync("CH" + nextCH);
@@ -94,7 +99,6 @@ public class DialogueHandler : MonoBehaviour
 
     private IEnumerator DisplayCurrentDialogue()
     {
-        _skipText = false;
         _textField.text = "";
         Dialogue currDialogue = _dialogues[_currDialogueIndex];
         _portraitImg.sprite = currDialogue.portrait;
@@ -106,6 +110,8 @@ public class DialogueHandler : MonoBehaviour
                 terminal.ClearTerminal();
             }
         }
+        _skipText = false;
+        _dialogueTextContainer.enabled = true;
 
         string currDialogueText = _dialogues[_currDialogueIndex].text;
         if (numFails >= FAILS_MAX && currDialogue.hintText.Length > 0) {
@@ -136,12 +142,15 @@ public class DialogueHandler : MonoBehaviour
             float delay = _skipText ? 0 : LETTER_DELAY;
             yield return new WaitForSeconds(delay);
         }        
+        EventSystem.current.SetSelectedGameObject(terminal.gameObject);
+
 
         if (currDialogue.isEvent) {
             terminal.SetVacuumView(false);
             filesys.SetGuidedMode(true);
             _tgtCmd = currDialogue.cmd;
             _tgtINode = currDialogue.tgtINodeName;
+            _redirINode = currDialogue.redirectTgt;
         } else if (auto) {
             _currDialogueIndex++;
             yield return new WaitForSeconds(AUTO_DELAY);
@@ -217,7 +226,10 @@ public class DialogueHandler : MonoBehaviour
 
     public bool CheckIfCorrect(CMDType type, string inodeName, string redirectTgtName = "") {
         if (type == _tgtCmd && inodeName == _tgtINode) {
-            return true;
+            if (type == CMDType.PYTHON3) {
+                PythonSuccess?.Invoke();
+            }
+            return redirectTgtName == _redirINode;
         } else {
             return false;
         }

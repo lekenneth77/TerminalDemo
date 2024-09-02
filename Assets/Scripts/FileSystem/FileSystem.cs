@@ -33,6 +33,7 @@ public class FileSystem : MonoBehaviour
     public event Action IncorrectCMDReceived;
     private TerminalTextHandler terminal;
 
+
     void Awake()
     {
         CreateFilesys();
@@ -83,14 +84,19 @@ public class FileSystem : MonoBehaviour
                 break;
             }
 
-            if (_guided) {
+            if (_guided && GameController.Get.Dialogue.CheckIfCorrect(CMDType.CLEAR, "")) {
                 CorrectCMDReceived?.Invoke();
             }
             terminal.ClearTerminal();
             break;
 
             case "python3":
-            //....
+            if (args.Count == 0) {
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
+                if (_guided) {IncorrectCMDReceived?.Invoke();}
+                break;
+            }
+            Python(args);
             break;
 
             default:
@@ -114,14 +120,7 @@ public class FileSystem : MonoBehaviour
             return;
         }
 
-        bool isAbsolute = path[0] == '\\';
-        INode startingNode = isAbsolute ? _root : _currentNode;
-        if (isAbsolute) {
-            path = path.Substring(1, path.Length - 1); //remove that first backslash
-        }
-        string[] dirs = path.Split('\\');
-        INode result = CDHelper(startingNode, dirs[dirs.Length - 1], dirs, 0);
-        
+       INode result = GetINode(path);
         if (result == null) {
             terminal.DisplayError(ErrorMessageType.PathNotFound, path);
         } else if (result.file) {
@@ -136,7 +135,7 @@ public class FileSystem : MonoBehaviour
             }
 
             _currentNode = result;
-            terminal.SetCurrentPath(_currentNode.path);
+            terminal.SetCurrentPath(_currentNode.path, false);
             return;
         }
 
@@ -182,6 +181,72 @@ public class FileSystem : MonoBehaviour
         INode result = CDHelper(_root, dirs[dirs.Length - 1], dirs, 0);
         _currentNode = result;
         GameController.Get.Terminal.SetCurrentPath(_currentNode.path);
+    }
+
+    private void Python(List<string> args) {
+        string redirector = "";
+        //look for redirector, only worry about one rn LOL, i really should've did this like OS
+        if (args.Count > 3) {
+            //TODO implement a REAL command struct LOL
+            if (_guided) {IncorrectCMDReceived?.Invoke();}
+            return;
+        } else if (args.Count == 2) {
+            terminal.DisplayError(ErrorMessageType.InvalidArguments, args[2]);
+            if (_guided) {IncorrectCMDReceived?.Invoke();}
+            return;
+        } else if (args.Count == 3) {
+            if (args[1] == "<" || args[1] == ">") {
+                redirector = args[1];
+            } else {
+                terminal.DisplayError(ErrorMessageType.InvalidArguments, args[1]);
+            }
+        } 
+        
+        string path = args[0];
+        INode result = GetINode(path);
+        if (result == null) { 
+            terminal.DisplayError(ErrorMessageType.PathNotFound, path);
+        } else if (!result.file) {
+            terminal.DisplayError(ErrorMessageType.DirectoryNotFile, result.name);
+        } else if (result.name.Substring(result.name.Length - 3, 3) != ".py"){
+            terminal.DisplayError(ErrorMessageType.NotValidFile, result.name);
+        } else {
+            if (redirector.Length > 0) {
+                //check redirect path
+                string redirectPath = args[2];
+                INode getter = GetINode(redirectPath);
+                if (getter == null) {
+                    terminal.DisplayError(ErrorMessageType.PathNotFound, redirectPath); if (_guided) {IncorrectCMDReceived?.Invoke();}
+                    return;
+                } else if (!getter.file) {
+                    terminal.DisplayError(ErrorMessageType.DirectoryNotFile, getter.name); if (_guided) {IncorrectCMDReceived?.Invoke();}
+                    return;
+                } else if (getter.name.Substring(getter.name.Length - 4, 4) != ".txt") {
+                    terminal.DisplayError(ErrorMessageType.NotValidFile, getter.name); if (_guided) {IncorrectCMDReceived?.Invoke();}
+                    return;
+                } else {
+                    //it's a valid path
+                    redirector += getter.name;
+                }
+            }
+
+            if (_guided && GameController.Get.Dialogue.CheckIfCorrect(CMDType.PYTHON3, result.name, redirector)) {
+                CorrectCMDReceived?.Invoke();
+            }
+            //for now do nothing lol if it's not guided
+        }
+        if (_guided) {IncorrectCMDReceived?.Invoke();}
+    }
+
+    private INode GetINode(string path) {
+        bool isAbsolute = path[0] == '\\';
+        INode startingNode = isAbsolute ? _root : _currentNode;
+        if (isAbsolute) {
+            path = path.Substring(1, path.Length - 1); //remove that first backslash
+        }
+        string[] dirs = path.Split('\\');
+        INode result = CDHelper(startingNode, dirs[dirs.Length - 1], dirs, 0);
+        return result;
     }
 
     //lists out the current directory's elements
@@ -241,15 +306,15 @@ public class FileSystem : MonoBehaviour
         docs.AddChild(pyScripts);
 
         INode moneyPy = new INode();
-        moneyPy.Init("money.py");
+        moneyPy.Init("money.py", true);
         pyScripts.AddChild(moneyPy);
 
         INode reporttxt = new INode();
-        reporttxt.Init("report.txt");
+        reporttxt.Init("report.txt", true);
         pyScripts.AddChild(reporttxt);
 
         INode daystxt = new INode();
-        daystxt.Init("days.txt");
+        daystxt.Init("days.txt", true);
         pyScripts.AddChild(daystxt);
 
         INode dls = new INode();

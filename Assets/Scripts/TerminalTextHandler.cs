@@ -9,7 +9,10 @@ public enum ErrorMessageType {
     UnrecognizedCommand,
     PathNotFound,
     InvalidNumberOfArgs,
-    FileNotDirectory
+    FileNotDirectory,
+    DirectoryNotFile,
+    NotValidFile,
+    InvalidArguments
 }
 
 public enum CMDType {
@@ -117,15 +120,30 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
             DisplayMessage(msg);
             break;
 
+            case ErrorMessageType.InvalidArguments:
+            msg = "Invalid argument: " + cause;
+            DisplayMessage(msg);
+            break;
+
+            case ErrorMessageType.DirectoryNotFile:
+            msg = cause + " is a directory, not a file";
+            DisplayMessage(msg);
+            break;
+
+            case ErrorMessageType.NotValidFile:
+            msg = cause + " is not a valid file for the command.";
+            DisplayMessage(msg);
+            break;
+
             default:
             DisplayMessage("What in the world did you just type into the terminal?");
             break;
         }
     }
 
-    public void SetCurrentPath(string p) {
+    public void SetCurrentPath(string p, bool newLine = true) {
         _currentPath = p + "> |";
-        _text.text += "\n" + _currentPath;
+        if (newLine) _text.text += "\n" + _currentPath;
         ResizeTextbox();
     }
 
