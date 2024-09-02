@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
     public int CurrentCH = 0;
 
     public bool Debug = false;
+    public bool Paused = false;
 
     void Awake()
     {

@@ -33,7 +33,7 @@ public class DialogueHandler : MonoBehaviour
     private int _currDialogueIndex = 0;
     private float LETTER_DELAY = 0.03f;
     private float AUTO_DELAY = 1f;
-    private const int FAILS_MAX = 2;
+    private const int FAILS_MAX = 3;
     private bool auto = false;
     private CMDType _tgtCmd;
     private string _tgtINode;
@@ -83,7 +83,12 @@ public class DialogueHandler : MonoBehaviour
             OnDialogueAdvance?.Invoke(_currDialogueIndex);
             StartCoroutine("DisplayCurrentDialogue");
         } else {
-            SceneManager.LoadSceneAsync("CH" + (GameController.Get.CurrentCH + 1));
+            int nextCH = GameController.Get.CurrentCH + 1;
+            if (nextCH > 5) {
+                //go to title screen?
+            } else {
+                SceneManager.LoadSceneAsync("CH" + nextCH);
+            }
         }
     }
 
@@ -192,6 +197,7 @@ public class DialogueHandler : MonoBehaviour
     }
 
     private void OnAdvanceButtonClicked() {
+        if (GameController.Get.Paused) {return;}
         NextDialogue();
         _advanceButton.interactable = false;
         _advanceButton.interactable = true;

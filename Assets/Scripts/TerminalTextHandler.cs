@@ -17,6 +17,7 @@ public enum CMDType {
     PWD,
     LS,
     CLEAR,
+    PYTHON3,
     UNKNOWN
 }
 
@@ -28,7 +29,6 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
     private string _currentPath = "";
     private string _command = "";
     private InputController ic;
-    
     void Awake()
     {
         _text.text = "";
@@ -57,10 +57,11 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         _vacuum.SetActive(view);
     }
 
+
     public void OnKeyboardPress(InputAction.CallbackContext context)
     {
         if (!this) {return;}
-        if (Input.inputString == "" || _vacuum.activeInHierarchy) {return;}
+        if (Input.inputString == "" || _vacuum.activeInHierarchy || GameController.Get.Paused) {return;}
      
         if (context.performed) {
             char key = Input.inputString[0];

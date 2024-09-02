@@ -351,8 +351,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[7].text
-      value: "It really ain\u2019t that bad, just [cd] to the directory and use [>]
-        to the text file."
+      value: "It really ain\u2019t that bad, just [cd] to the directory, run the
+        code, and use [>] to output to the text file."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[8].text
