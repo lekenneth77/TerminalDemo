@@ -16,6 +16,7 @@ public class TitleScreen : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _titleText;
     [SerializeField] private Button _startButton;
     [SerializeField] private Animator _animation;
+    [SerializeField] private CanvasGroup _numbersGroup;
 
     // Start is called before the first frame update
 
@@ -49,8 +50,10 @@ public class TitleScreen : MonoBehaviour
 
     private void ShowButtons() {
         _startButton.gameObject.SetActive(true);
+        _animation.Play("numbers");
         var seq = DOTween.Sequence();
         seq.Append(_startButton.GetComponent<CanvasGroup>().DOFade(1, FADE_IN));
+        seq.Join(_numbersGroup.DOFade(1, FADE_IN * 1.5f));
         seq.Play();
     }
 
