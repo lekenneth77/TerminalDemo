@@ -8,18 +8,21 @@ public class INode {
     public List<INode> children;
     public INode parent;
     public bool file = false;
+    public Trie trie;
 
     public void Init(string n, bool isFile = false) {
         name = n;
         path = "C:";
         file = isFile;
         children = new List<INode>();
+        trie = new Trie();
     }
 
     public void AddChild(INode node) {
         children.Add(node);
         node.parent = this;
         node.path = path + "\\" + node.name;
+        trie.AddWord(node.name);
     }
 
 }
@@ -281,6 +284,23 @@ public class FileSystem : MonoBehaviour
 
         terminal.DisplayMessage("\n" + _currentNode.path + "\n");
     }
+
+    public void AutocompletePath(string path) {
+        //let's assume a simple path rn, so it starts from the current working directory
+        Trie curTrie = _currentNode.trie;
+        List<string> ls = curTrie.GetWordsWithPrefix(path);
+        if (ls.Count == 0) {
+            //do nothing
+        } else if (ls.Count == 1) {
+            //auto complete!
+            terminal.TextTabAutoComplete(ls[0]);
+        } else {
+            //we have many results, print them all out, then go to a new line with the same command!
+            terminal.ShowPossibleAutoComplete(ls);
+        }
+    }
+
+
     private void CreateFilesys() {
         _root = new INode();
         _root.Init("C:");

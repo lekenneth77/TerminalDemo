@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrieNode {
-    public TrieNode[] children = new TrieNode[26];
+    public Dictionary<char, TrieNode> children = new Dictionary<char, TrieNode>(); //i forgot i have to also deal with periods :(
     public bool isWord = false;
     public string word = ""; //i could check if word is empty but let's be normal about this
 }
@@ -16,25 +16,24 @@ public class Trie
     }
 
     public void AddWord(string word) {
-        word = word.ToLower();
-
+        string lowerWord = word.ToLower();
+        AddHelper(root, lowerWord, word, 0);
     }
 
-    private void AddHelper(TrieNode curNode, string word, int index) {
+    private void AddHelper(TrieNode curNode, string traversalWord, string realWord, int index) {
         if (curNode == null) {
             return;
-        } else if (index >= word.Length) {
+        } else if (index >= traversalWord.Length) {
             curNode.isWord = true;
-            curNode.word = word;
+            curNode.word = realWord;
             return;
         }
 
-        int charId = word[index] - 'a';
-        TrieNode nextNode = curNode.children[charId];
-        if (nextNode == null) {
-            nextNode = new TrieNode();
+        if (!curNode.children.ContainsKey(traversalWord[index])) {
+            curNode.children.Add(traversalWord[index], new TrieNode());
         }
-        AddHelper(nextNode, word, index + 1);
+
+        AddHelper(curNode.children[traversalWord[index]], traversalWord, realWord, index + 1);
     }
 
     public bool DoesWordExist(string word) {
@@ -44,7 +43,7 @@ public class Trie
     }
 
     public List<string> GetWordsWithPrefix(string prefix) {
-        prefix= prefix.ToLower();
+        prefix = prefix.ToLower();
         TrieNode result = FindHelper(root, prefix, 0);
         if (result == null) {
             return null; //no word with prefix
@@ -60,9 +59,8 @@ public class Trie
             return curNode;
         } 
 
-        int charId = word[index] - 'a';
-        if (curNode.children[charId] != null) {
-            TrieNode result = FindHelper(curNode.children[charId], word, index + 1);
+        if (curNode.children.ContainsKey(word[index])) {
+            TrieNode result = FindHelper(curNode.children[word[index]], word, index + 1);
             return result;
         }
         return curNode;
@@ -78,10 +76,8 @@ public class Trie
             words.Add(curNode.word);
         }
 
-        for (int i = 0; i < 26; i++) {
-            if (curNode.children[i] != null) {
-                GetAllWordsFromNode(curNode.children[i], words);
-            }
+        foreach (TrieNode n in curNode.children.Values) {
+            GetAllWordsFromNode(n, words);
         }
     }
 

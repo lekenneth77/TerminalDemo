@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 using System;
+using Mono.Cecil;
 
 public enum ErrorMessageType {
     UnrecognizedCommand,
@@ -63,11 +64,9 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
 
     public void OnKeyboardPress(InputAction.CallbackContext context)
     {
-        if (!this) {return;}
-        if (Input.inputString == "" || _vacuum.activeInHierarchy || GameController.Get.Paused) {return;}
+        if (!this || _vacuum.activeInHierarchy || GameController.Get.Paused) {return;}
      
         if (context.performed) {
-            char key = Input.inputString[0];
             if (Input.GetKeyDown(KeyCode.Backspace)) {
                 if (_command.Length > 0) {
                     _text.text = PopBack(_text.text);
@@ -87,10 +86,15 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
                 }
                 GameController.Get.Filesys.ReceiveCommand(cmd, args);
                 _command = "";
-            } else {
+            } else if (Input.GetKeyDown(KeyCode.Tab)) {
+                //try to auto complete the last word, space seperated
+                string lastWord = GetLastWord(_command);
+                GameController.Get.Filesys.AutocompletePath(lastWord);
+            } else if (Input.inputString != "") {
+                char key = Input.inputString[0];
                 _text.text = PopBack(_text.text);
                 _text.text += key;
-                _text.text = PushBack(_text.text, "|");
+                _text.text = PushBack(_text.text, "|"); // we should really change this to, idk INSERT?!!?!!
                 _command += key;
             }
         }
@@ -165,6 +169,29 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         ResizeTextbox();
     }
 
+    public void TextTabAutoComplete(string autocompletedstring) {
+        //remove last word from current command and replace it with the autocompletedstring
+        //this makes a huge assumption that the last word is like, an actual word and not just a bunch of nothing or spaces
+
+        string lastWord = GetLastWord(_command);
+        _command = _command.Substring(0, _command.Length - lastWord.Length);
+        _command += autocompletedstring;
+        _text.text = PopBack(_text.text); //remove |
+        _text.text = _text.text.Substring(0, _text.text.Length - lastWord.Length) + autocompletedstring + "|";
+        // _text.text = _currentPath.Substring(0, _currentPath.Length - 1) + _command + "|"; //that substring is to remove the stupid |, god i hate my monkey speedrun design
+    }
+
+    public void ShowPossibleAutoComplete(List<string> possibilities) {
+        string lastLine = GetLastLine(_text.text);
+        _text.text = PopBack(_text.text); //remove |
+        _text.text += "\n";
+        foreach (string str in possibilities) {
+            _text.text += str + " ";
+        }
+        _text.text += "\n";
+        _text.text += lastLine;
+    }
+
     private string PopBack(string str) {
         return str.Substring(0, str.Length - 1);
     }
@@ -173,13 +200,34 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         return str.Insert(str.Length, add);
     }
 
-    private string GetFirstWord(string sentence) {
-        int index = 0;
-        while (index < sentence.Length && sentence[index] != ' ') {
-            index++;
+    private string GetLastWord(string sentence) {
+        int index = sentence.Length - 1;
+        //start at a real character
+        while (index >= 0 && sentence[index] == ' ') {
+            index--;
+        }
+        if (index < 0){return "";}
+
+        int length = 1;
+        while (index > 0 && sentence[index] != ' ') {
+            index--;
+            length++;
         }
 
-        return sentence.Substring(0, index);
+        return sentence.Substring(index, length);
+    }
+
+    private string GetLastLine(string paragraph) {
+        int index = paragraph.Length - 1;
+        if (paragraph[index] == '\n') {return "";}
+
+        int length = 1;
+        while (index > 0 && paragraph[index] != '\n') {
+            index--;
+            length++;
+        }
+
+        return paragraph.Substring(index, length);
     }
 
     private List<string> ParseCommand(string str, out string cmd) {
