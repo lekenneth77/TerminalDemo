@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Chapters/CH5.unity
     guid: 7bc8923401fe1254bbc91d594183eeda
+  - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 1114642e649b7fe438cea12fcfc0bda7
   m_configObjects: {}
