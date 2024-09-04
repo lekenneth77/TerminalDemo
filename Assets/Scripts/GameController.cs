@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 public enum TerminalType {
-    Windows, //powershell, WSL, bash
+    Windows, //command prompt
     Mac,
-    CommandPrompt //the weird child
+    Linux
 }
 
 public class GameController : MonoBehaviour

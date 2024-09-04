@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 
 public class TitleScreen : MonoBehaviour
@@ -60,11 +61,12 @@ public class TitleScreen : MonoBehaviour
     }
 
     public void StartGame() {
+        var seq = DOTween.Sequence();
+        _numbersGroup.DOFade(0, 2f);
         StartCoroutine("GoToChapterSelect");
     }
 
     private IEnumerator GoToChapterSelect() {
-        yield return new WaitForSeconds(0.2f);
         _goToChapterSelectText.text = "> ";
         yield return new WaitForSeconds(LETTER_DELAY / 2f);
         _goToChapterSelectText.text = _goToChapterSelectText.text.Insert(2, "_");
@@ -75,9 +77,8 @@ public class TitleScreen : MonoBehaviour
         }
         _goToChapterSelectText.text = _goToChapterSelectText.text.Substring(0, _goToChapterSelectText.text.Length - 1);
         yield return new WaitForSeconds(0.5f);
-        _goToChapterSelectText.text = "> ";
-        yield return new WaitForSeconds(0.1f);
         //load chapterselect
+        SceneManager.LoadSceneAsync("ChapterSelect");
     }
 
 }
