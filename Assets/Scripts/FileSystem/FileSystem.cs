@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class INode {
@@ -138,13 +139,14 @@ public class FileSystem : MonoBehaviour
             }
 
             _currentNode = result;
-            terminal.SetCurrentPath(_currentNode.path, false);
+            terminal.SetCurrentPath(_currentNode.path, true);
             return;
         }
 
         if (_guided) { IncorrectCMDReceived?.Invoke();}
     }
 
+    //DOESN'T ACTUALLY CD , CHOOSE A BETTER NAME MAN
     private INode CDHelper(INode curNode, string target, string[] dirs, int index) {
         if (curNode == null) {
             return null;
@@ -183,7 +185,7 @@ public class FileSystem : MonoBehaviour
         string[] dirs = absolutePath.Split('\\');
         INode result = CDHelper(_root, dirs[dirs.Length - 1], dirs, 0);
         _currentNode = result;
-        GameController.Get.Terminal.SetCurrentPath(_currentNode.path);
+        GameController.Get.Terminal.SetCurrentPath(_currentNode.path, false);
     }
 
     private void Python(List<string> args) {
@@ -286,9 +288,21 @@ public class FileSystem : MonoBehaviour
     }
 
     public void AutocompletePath(string path) {
-        //let's assume a simple path rn, so it starts from the current working directory
-        Trie curTrie = _currentNode.trie;
-        List<string> ls = curTrie.GetWordsWithPrefix(path);
+        bool isAbsolute = path[0] == '\\';
+        INode startingNode = isAbsolute ? _root : _currentNode;
+        if (isAbsolute) {
+            path = path.Substring(1, path.Length - 1); //remove that first backslash
+        }
+        string[] dirs = path.Split("\\");
+        string[] poppedDirs = dirs.Take(dirs.Length - 1).ToArray();
+        INode result = dirs.Length > 1 ? CDHelper(startingNode, dirs[dirs.Length - 2], poppedDirs, 0) : startingNode; //i feel like this might cause a bug in the future
+        if (result == null) {
+            //do nothing
+            return;
+        }
+
+        Trie curTrie = result.trie;
+        List<string> ls = curTrie.GetWordsWithPrefix(dirs[dirs.Length - 1]);
         if (ls.Count == 0) {
             //do nothing
         } else if (ls.Count == 1) {

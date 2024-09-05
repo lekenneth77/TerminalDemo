@@ -46,9 +46,8 @@ public class Trie
         prefix = prefix.ToLower();
         TrieNode result = FindHelper(root, prefix, 0);
         if (result == null) {
-            return null; //no word with prefix
+            return new List<string>();
         }
-
         List<string> words = new List<string>();
         GetAllWordsFromNode(result, words);
         return words;
@@ -60,10 +59,9 @@ public class Trie
         } 
 
         if (curNode.children.ContainsKey(word[index])) {
-            TrieNode result = FindHelper(curNode.children[word[index]], word, index + 1);
-            return result;
+            return FindHelper(curNode.children[word[index]], word, index + 1);
         }
-        return curNode;
+        return null;
     }
 
     //given a node, gets all words that start from this node

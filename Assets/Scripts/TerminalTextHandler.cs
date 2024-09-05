@@ -89,6 +89,7 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
             } else if (Input.GetKeyDown(KeyCode.Tab)) {
                 //try to auto complete the last word, space seperated
                 string lastWord = GetLastWord(_command);
+                Debug.Log("Last Word: " + lastWord);
                 GameController.Get.Filesys.AutocompletePath(lastWord);
             } else if (Input.inputString != "") {
                 char key = Input.inputString[0];
@@ -178,7 +179,6 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         _command += autocompletedstring;
         _text.text = PopBack(_text.text); //remove |
         _text.text = _text.text.Substring(0, _text.text.Length - lastWord.Length) + autocompletedstring + "|";
-        // _text.text = _currentPath.Substring(0, _currentPath.Length - 1) + _command + "|"; //that substring is to remove the stupid |, god i hate my monkey speedrun design
     }
 
     public void ShowPossibleAutoComplete(List<string> possibilities) {
@@ -207,12 +207,13 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
             index--;
         }
         if (index < 0){return "";}
-
-        int length = 1;
-        while (index > 0 && sentence[index] != ' ') {
+        //cd doc
+        int length = 0;
+        while (index >= 0 && sentence[index] != ' ') {
             index--;
             length++;
         }
+        ++index;
 
         return sentence.Substring(index, length);
     }
