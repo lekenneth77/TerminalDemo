@@ -147,10 +147,10 @@ public class FileSystem : MonoBehaviour
     }
 
     //DOESN'T ACTUALLY CD , CHOOSE A BETTER NAME MAN
-    private INode CDHelper(INode curNode, string target, string[] dirs, int index) {
+    private INode CDHelper(INode startingNode, INode curNode, string target, string[] dirs, int index) {
         if (curNode == null) {
             return null;
-        }  else if (curNode.name == target) {
+        }  else if (curNode.name == target && curNode != startingNode) {
             return curNode;
         } else if (index >= dirs.Length) {
             return null;
@@ -162,19 +162,19 @@ public class FileSystem : MonoBehaviour
             } else if (index == dirs.Length - 1) {
                 return curNode.parent;
             } else {
-                return CDHelper(curNode.parent, target, dirs, index + 1);
+                return CDHelper(startingNode, curNode.parent, target, dirs, index + 1);
             }
         } else if (dirs[index] == ".") {
             if (index == dirs.Length - 1) {
                 return curNode;
             } else {
-                return CDHelper(curNode, target, dirs, index + 1);
+                return CDHelper(startingNode, curNode, target, dirs, index + 1);
             }
         }
 
         foreach (INode child in curNode.children) {
             if (child.name == dirs[index]) {
-                return CDHelper(child, target, dirs, index + 1);
+                return CDHelper(startingNode, child, target, dirs, index + 1);
             }
         }
         return null;
@@ -183,7 +183,7 @@ public class FileSystem : MonoBehaviour
     public void ForceCD(string absolutePath) {
         absolutePath = absolutePath.Substring(1, absolutePath.Length - 1); //remove that first backslash
         string[] dirs = absolutePath.Split('\\');
-        INode result = CDHelper(_root, dirs[dirs.Length - 1], dirs, 0);
+        INode result = CDHelper(_root, _root, dirs[dirs.Length - 1], dirs, 0);
         _currentNode = result;
         GameController.Get.Terminal.SetCurrentPath(_currentNode.path, false);
     }
@@ -250,7 +250,7 @@ public class FileSystem : MonoBehaviour
             path = path.Substring(1, path.Length - 1); //remove that first backslash
         }
         string[] dirs = path.Split('\\');
-        INode result = CDHelper(startingNode, dirs[dirs.Length - 1], dirs, 0);
+        INode result = CDHelper(startingNode, startingNode, dirs[dirs.Length - 1], dirs, 0);
         return result;
     }
 
@@ -295,7 +295,7 @@ public class FileSystem : MonoBehaviour
         }
         string[] dirs = path.Split("\\");
         string[] poppedDirs = dirs.Take(dirs.Length - 1).ToArray();
-        INode result = dirs.Length > 1 ? CDHelper(startingNode, dirs[dirs.Length - 2], poppedDirs, 0) : startingNode; //i feel like this might cause a bug in the future
+        INode result = dirs.Length > 1 ? CDHelper(startingNode, startingNode, dirs[dirs.Length - 2], poppedDirs, 0) : startingNode; //i feel like this might cause a bug in the future
         if (result == null) {
             //do nothing
             return;

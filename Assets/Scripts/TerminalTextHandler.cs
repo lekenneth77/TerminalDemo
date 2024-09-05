@@ -32,7 +32,13 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
     [SerializeField] private GameObject _vacuum;
     private string _currentPath = "";
     private string _command = "";
+    private string _commandCopy = ""; //USED TO SAVE STATE FOR DOWN ARROW KEY
+    private bool _savedTypingCommand = false;
     private InputController ic;
+    private List<string> _upCommands = new List<string>();
+    private int _upIndex = 0;
+    //TODO ADD A LIMIT TO COMMAND AND LIST/STACK PUSHES
+
     void Awake()
     {
         _text.text = "";
@@ -75,6 +81,9 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
                     _command = PopBack(_command);
                 }
             } else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) {
+                _upCommands.Add(_command); //push command
+                _upIndex = _upCommands.Count;
+                _savedTypingCommand = false;
                 _text.text = PopBack(_text.text);
                 string cmd;
                 List<string> args = ParseCommand(_command, out cmd);
@@ -89,16 +98,48 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
             } else if (Input.GetKeyDown(KeyCode.Tab)) {
                 //try to auto complete the last word, space seperated
                 string lastWord = GetLastWord(_command);
-                Debug.Log("Last Word: " + lastWord);
                 GameController.Get.Filesys.AutocompletePath(lastWord);
+            } else if (Input.GetKeyDown(KeyCode.UpArrow)) {
+                if (_upIndex > 0) --_upIndex;
+                if (_upIndex >= 0 && _upIndex < _upCommands.Count) {
+                    if (_upIndex == _upCommands.Count - 1 && !_savedTypingCommand) {
+                        //save the current typing command
+                        _savedTypingCommand = true;
+                        _commandCopy = _command;
+                    }
+                    //replace current line
+                    string lastLine = GetLastLine(_text.text);
+                    _text.text = _text.text.Substring(0, _text.text.Length - lastLine.Length);
+                    _text.text += PopBack(_currentPath) + PushBack(_upCommands[_upIndex], "|");
+                    _command = _upCommands[_upIndex];
+                }
+
+            } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+                if (_upIndex < _upCommands.Count) ++_upIndex;
+                if (_upIndex < _upCommands.Count) {
+                    //replace current line
+                    string lastLine = GetLastLine(_text.text);
+                    _text.text = _text.text.Substring(0, _text.text.Length - lastLine.Length);
+                    _text.text += PopBack(_currentPath) + PushBack(_upCommands[_upIndex], "|");
+                    _command = _upCommands[_upIndex];
+                } else {
+                    //go back down to the typing line, need to use the saved copy if we've done that
+                    string lastLine = GetLastLine(_text.text);
+                    _text.text = _text.text.Substring(0, _text.text.Length - lastLine.Length);
+                    if(_savedTypingCommand) _command = _commandCopy;
+                    _text.text += PopBack(_currentPath) + PushBack(_command, "|");
+                }
+
             } else if (Input.inputString != "") {
                 char key = Input.inputString[0];
                 _text.text = PopBack(_text.text);
                 _text.text += key;
                 _text.text = PushBack(_text.text, "|"); // we should really change this to, idk INSERT?!!?!!
                 _command += key;
+                _savedTypingCommand = false;
+                _upIndex = _upCommands.Count;
                 ResizeTextbox();
-            }
+            } 
         }
 
     }
@@ -225,11 +266,12 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         int index = paragraph.Length - 1;
         if (paragraph[index] == '\n') {return "";}
 
-        int length = 1;
-        while (index > 0 && paragraph[index] != '\n') {
+        int length = 0;
+        while (index >= 0 && paragraph[index] != '\n') {
             index--;
             length++;
         }
+        ++index;
 
         return paragraph.Substring(index, length);
     }
