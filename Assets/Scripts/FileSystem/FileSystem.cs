@@ -307,7 +307,18 @@ public class FileSystem : MonoBehaviour
             //do nothing
         } else if (ls.Count == 1) {
             //auto complete!
-            terminal.TextTabAutoComplete(ls[0]);
+            //add n - 1 dirs to the list and then append the ls[0] and make the string from that bro, big brain
+            List<string> autocompletedirs = new List<string>();
+            for (int i = 0; i < dirs.Length - 1; i++) {
+                autocompletedirs.Add(dirs[i]);
+            }
+            autocompletedirs.Add(ls[0]);
+            string autocompletedpath = "";
+            foreach (string s in autocompletedirs) {
+                autocompletedpath += s + '\\';
+            }
+            autocompletedpath = autocompletedpath.Substring(0, autocompletedpath.Length - 1); //AHAHAHAHA FENCE POST
+            terminal.TextTabAutoComplete(autocompletedpath);
         } else {
             //we have many results, print them all out, then go to a new line with the same command!
             terminal.ShowPossibleAutoComplete(ls);

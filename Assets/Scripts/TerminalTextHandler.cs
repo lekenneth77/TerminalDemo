@@ -97,6 +97,7 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
                 _text.text += key;
                 _text.text = PushBack(_text.text, "|"); // we should really change this to, idk INSERT?!!?!!
                 _command += key;
+                ResizeTextbox();
             }
         }
 
@@ -179,6 +180,7 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         _command += autocompletedstring;
         _text.text = PopBack(_text.text); //remove |
         _text.text = _text.text.Substring(0, _text.text.Length - lastWord.Length) + autocompletedstring + "|";
+        ResizeTextbox();
     }
 
     public void ShowPossibleAutoComplete(List<string> possibilities) {
@@ -190,6 +192,7 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         }
         _text.text += "\n";
         _text.text += lastLine;
+        ResizeTextbox();
     }
 
     private string PopBack(string str) {
