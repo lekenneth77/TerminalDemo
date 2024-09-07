@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Chapters/CH6.unity
     guid: 7bc8923401fe1254bbc91d594183eeda
+  - enabled: 1
+    path: Assets/Scenes/PracticeSelect.unity
+    guid: f2d4b8df2055e064b8ea458ad992a8ad
   m_configObjects: {}

@@ -165,46 +165,46 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         }
     }
 
-    public void DisplayError(ErrorMessageType msgType, string cause) {
+    public void DisplayError(ErrorMessageType msgType, string cause, bool doNewLine = true) {
         string msg = "";
         switch (msgType) {
             case ErrorMessageType.UnrecognizedCommand:
             msg = cause + " is not a recognized command";
-            DisplayMessage(msg);
+            DisplayMessage(msg, doNewLine);
             break;
 
             case ErrorMessageType.PathNotFound:
             msg = "Cannot find path " + cause + " because it does not exist";
-            DisplayMessage(msg);
+            DisplayMessage(msg, doNewLine);
             break; 
 
             case ErrorMessageType.InvalidNumberOfArgs:
             msg = "Invalid Number of args for this command: " + cause;
-            DisplayMessage(msg);
+            DisplayMessage(msg, doNewLine);
             break;
 
             case ErrorMessageType.FileNotDirectory:
             msg = cause + " is a file, not a directory";
-            DisplayMessage(msg);
+            DisplayMessage(msg, doNewLine);
             break;
 
             case ErrorMessageType.InvalidArguments:
             msg = "Invalid argument: " + cause;
-            DisplayMessage(msg);
+            DisplayMessage(msg, doNewLine);
             break;
 
             case ErrorMessageType.DirectoryNotFile:
             msg = cause + " is a directory, not a file";
-            DisplayMessage(msg);
+            DisplayMessage(msg, doNewLine);
             break;
 
             case ErrorMessageType.NotValidFile:
             msg = cause + " is not a valid file for the command.";
-            DisplayMessage(msg);
+            DisplayMessage(msg, doNewLine);
             break;
 
             default:
-            DisplayMessage("What in the world did you just type into the terminal?");
+            DisplayMessage("What in the world did you just type into the terminal?", doNewLine);
             break;
         }
     }
@@ -216,10 +216,14 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         ResizeTextbox();
     }
 
-    public void DisplayMessage(string message) {
+    public void DisplayMessage(string message, bool doNewLine = true) {
         _text.text += '\n';
-        _text.text += message + '\n';
-        _text.text += _currentPath;
+        if (doNewLine) {
+            _text.text += message + '\n';
+            _text.text += _currentPath;
+        } else {
+            _text.text += message;
+        }
         ResizeTextbox();
     }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class FileExplorerScreen : MonoBehaviour
     private int _currentlyActiveButton = -1;
     private Color _transparentColor = new Color(1, 1, 1, 0);
     private Color _highlightColor = new Color(0, 0.85f, 0.85f, 0.5f);
+    [SerializeField] private TextMeshProUGUI _pathText;
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,6 +23,15 @@ public class FileExplorerScreen : MonoBehaviour
         backButton.onClick.AddListener(HandleBackButton);
         if (!prevScreen) {
             backButton.enabled = false;
+        }
+    }
+
+    void Start()
+    {
+        if (GameController.Get.TerminalType == TerminalType.Mac) {
+            _pathText.text = _pathText.text.Replace("\\", "/");
+        } else {
+            _pathText.text = _pathText.text.Replace("/", "\\");
         }
     }
 

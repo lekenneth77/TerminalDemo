@@ -69,7 +69,8 @@ public class FileSystem : MonoBehaviour
         switch (command) {
             case CMDType.CD:
             if (args.Count != 1) {
-                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "cd");
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "cd", !_guided);
+                if (_guided) {IncorrectCMDReceived?.Invoke();}
                 break;
             }
             ChangeDirectory(args[0]);
@@ -77,7 +78,8 @@ public class FileSystem : MonoBehaviour
 
             case CMDType.LS:
             if (args.Count != 0) {
-                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "ls");
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "ls", !_guided);
+                if (_guided) {IncorrectCMDReceived?.Invoke();}
                 break;
             }
             List();
@@ -85,7 +87,8 @@ public class FileSystem : MonoBehaviour
 
             case CMDType.PWD:
             if (args.Count != 0) {
-                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "pwd");
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "pwd", !_guided);
+                if (_guided) {IncorrectCMDReceived?.Invoke();}
                 break;
             }
             PrintWorkingDirectory();
@@ -93,7 +96,7 @@ public class FileSystem : MonoBehaviour
 
             case CMDType.CLEAR:
             if (args.Count != 0) {
-                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "clear");
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "clear", !_guided);
                 if (_guided) {IncorrectCMDReceived?.Invoke();}
                 break;
             }
@@ -106,7 +109,7 @@ public class FileSystem : MonoBehaviour
 
             case CMDType.PYTHON3:
             if (args.Count == 0) {
-                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "python3");
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "python3", !_guided);
                 if (_guided) {IncorrectCMDReceived?.Invoke();}
                 break;
             }
@@ -124,9 +127,9 @@ public class FileSystem : MonoBehaviour
 
        INode result = GetINode(path);
         if (result == null) {
-            terminal.DisplayError(ErrorMessageType.PathNotFound, path);
+            terminal.DisplayError(ErrorMessageType.PathNotFound, path, !_guided);
         } else if (result.file) {
-            terminal.DisplayError(ErrorMessageType.FileNotDirectory, path);
+            terminal.DisplayError(ErrorMessageType.FileNotDirectory, path, !_guided);
         } else {
             if (_guided) {
                 if (GameController.Get.Dialogue.CheckIfCorrect(CMDType.CD, result.name)) {
@@ -195,38 +198,40 @@ public class FileSystem : MonoBehaviour
             if (_guided) {IncorrectCMDReceived?.Invoke();}
             return;
         } else if (args.Count == 2) {
-            terminal.DisplayError(ErrorMessageType.InvalidArguments, args[2]);
+            terminal.DisplayError(ErrorMessageType.InvalidArguments, args[2], !_guided);
             if (_guided) {IncorrectCMDReceived?.Invoke();}
             return;
         } else if (args.Count == 3) {
             if (args[1] == "<" || args[1] == ">") {
                 redirector = args[1];
             } else {
-                terminal.DisplayError(ErrorMessageType.InvalidArguments, args[1]);
+                terminal.DisplayError(ErrorMessageType.InvalidArguments, args[1], !_guided);
+                if (_guided) {IncorrectCMDReceived?.Invoke();}
+                return;
             }
         } 
         
         string path = args[0];
         INode result = GetINode(path);
         if (result == null) { 
-            terminal.DisplayError(ErrorMessageType.PathNotFound, path);
+            terminal.DisplayError(ErrorMessageType.PathNotFound, path, !_guided);
         } else if (!result.file) {
-            terminal.DisplayError(ErrorMessageType.DirectoryNotFile, result.name);
+            terminal.DisplayError(ErrorMessageType.DirectoryNotFile, result.name, !_guided);
         } else if (result.name.Substring(result.name.Length - 3, 3) != ".py"){
-            terminal.DisplayError(ErrorMessageType.NotValidFile, result.name);
+            terminal.DisplayError(ErrorMessageType.NotValidFile, result.name, !_guided);
         } else {
             if (redirector.Length > 0) {
                 //check redirect path
                 string redirectPath = args[2];
                 INode getter = GetINode(redirectPath);
                 if (getter == null) {
-                    terminal.DisplayError(ErrorMessageType.PathNotFound, redirectPath); if (_guided) {IncorrectCMDReceived?.Invoke();}
+                    terminal.DisplayError(ErrorMessageType.PathNotFound, redirectPath, !_guided); if (_guided) {IncorrectCMDReceived?.Invoke();}
                     return;
                 } else if (!getter.file) {
-                    terminal.DisplayError(ErrorMessageType.DirectoryNotFile, getter.name); if (_guided) {IncorrectCMDReceived?.Invoke();}
+                    terminal.DisplayError(ErrorMessageType.DirectoryNotFile, getter.name, !_guided); if (_guided) {IncorrectCMDReceived?.Invoke();}
                     return;
                 } else if (getter.name.Substring(getter.name.Length - 4, 4) != ".txt") {
-                    terminal.DisplayError(ErrorMessageType.NotValidFile, getter.name); if (_guided) {IncorrectCMDReceived?.Invoke();}
+                    terminal.DisplayError(ErrorMessageType.NotValidFile, getter.name, !_guided); if (_guided) {IncorrectCMDReceived?.Invoke();}
                     return;
                 } else {
                     //it's a valid path

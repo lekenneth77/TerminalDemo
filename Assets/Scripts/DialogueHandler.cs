@@ -190,12 +190,14 @@ public class DialogueHandler : MonoBehaviour
 
     private void DisplayIncorrectDialogue() {
         numFails++;
-        terminal.GoToNextLine();
         StopAllCoroutines();
         StartCoroutine("DisplayIncorrectHelper");
     }
 
     private IEnumerator DisplayIncorrectHelper() {
+        terminal.GoToNextLine();
+        yield return null;
+
         _textField.text = "";
         string incorrText = "That wasn't correct, ";
         switch (_tgtCmd) {
