@@ -15,6 +15,7 @@ public class ChapterSelect : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _terminalText; 
     [SerializeField] private List<Button> _chapterButtons;
     [SerializeField] private List<RectTransform> _chapterLerps;
+    [SerializeField] private GameObject _vacuum;
     private Vector2 _startingPos;
     private bool _animate = false;
     public float animSpeed = 5f;
@@ -59,6 +60,7 @@ public class ChapterSelect : MonoBehaviour
     }
 
     private void LoadChapter(int chID) {
+        _vacuum.SetActive(true);
         string name = "CH" + chID;
         LoadingScreen.Get.AnimateIn(name);
     }

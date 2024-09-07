@@ -411,7 +411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[2].text
-      value: "There actually is. Glad you mentioned it, I\u2019ll show you the two
+      value: "There actually are. Glad you mentioned it, I\u2019ll show you the two
         most important shortcuts, [tab] and the [up/down arrow keys]."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}

@@ -210,7 +210,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 122530070918095628, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_text
-      value: What are redirectors?
+      value: Story Conclusion - Thanks for Playing!
       objectReference: {fileID: 0}
     - target: {fileID: 1124067636506679172, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_Alpha
@@ -456,8 +456,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[3].text
-      value: " i write code not dialogue, hope this terminal demo was helpful to
-        anyone though. Thanks for playing!\r"
+      value: "i write code not dialogue, hope this terminal demo was helpful to anyone
+        though. Prof. Baggu out. Thanks for playing!\r"
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].text

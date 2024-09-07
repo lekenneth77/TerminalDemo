@@ -454,11 +454,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[7].text
-      value: "That\u2019s right, to keep it simple, you don\u2019t need to type the
-        C:, and can just use the slash at the start to represent the home directory.
-        Try typing the command [cd \\Users\\baggu\\Documents]. Note there is a space
-        between [cd] and the path argument, that\u2019s how you pass arguments into
-        commands, by separating them with a space."
+      value: "That\u2019s right and you don\u2019t need to type the C:, and can use
+        the backslash at the start to represent the home directory. Try typing the
+        command [cd \\Users\\baggu\\Documents]. Note there is a space between [cd]
+        and the path argument, that\u2019s how you pass arguments into commands,
+        by separating them with a space."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[8].text

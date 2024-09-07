@@ -416,9 +416,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[3].text
-      value: 'It is showing the contents of the {Documents} folder. It has 2 subdirectories,
-        and an image file. You would say that the {Documents} is the (current working
-        directory) of the File Explorer. '
+      value: 'It''s showing the contents of the {Documents} folder and it looks like
+        it has 2 subdirectories. You would say that the {Documents} is the (current
+        working directory) of the File Explorer. '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].text
@@ -697,9 +697,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[3].macLinuxText
-      value: 'It is showing the contents of the {Documents} folder. It has 2 subdirectories,
-        and an image file. You would say that the {Documents} is the (current working
-        directory) of the Finder. '
+      value: 'It''s showing the contents of the {Documents} folder and it looks like
+        it has 2 subdirectories. You would say that the {Documents} is the (current
+        working directory) of the Finder. '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].startingPath
