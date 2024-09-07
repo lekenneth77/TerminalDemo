@@ -5,7 +5,6 @@ using UnityEngine;
 public enum TerminalType {
     Windows, //command prompt
     Mac,
-    Linux
 }
 
 public class GameController : MonoBehaviour
@@ -32,6 +31,10 @@ public class GameController : MonoBehaviour
             return;
         } else {
             Get = this;
+        }
+        
+        if (TerminalTypeSingleton.Get) {
+            TerminalType = TerminalTypeSingleton.Get.terminalType;
         }
     }
 

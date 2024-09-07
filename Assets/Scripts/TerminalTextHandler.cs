@@ -50,28 +50,27 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         ResizeTextbox();
         ic = new InputController();
         ic.Keyboard.AddCallbacks(this);
+    }
+
+    public void EnableKeyboard() {
         ic.Keyboard.Enable();
     }
 
     private void OnDestroy()
     {
         StopAllCoroutines();
-        ic.Keyboard.RemoveCallbacks(this);
-        ic.Keyboard.Disable();
-        ic.Keyboard.KeyboardPress.Dispose();
-        ic.Disable();
-        ic.Dispose();
     }
 
     public void SetVacuumView(bool view) {
         _vacuum.SetActive(view);
+        if (view) {ic.Keyboard.Disable();}
+        else {ic.Keyboard.Enable();}
     }
-
 
     public void OnKeyboardPress(InputAction.CallbackContext context)
     {
         if (!this || _vacuum.activeInHierarchy || GameController.Get.Paused) {return;}
-     
+       
         if (context.performed) {
             if (Input.GetKeyDown(KeyCode.Backspace)) {
                 if (_command.Length > 0) {
@@ -84,16 +83,7 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
                 _upCommands.Add(_command); //push command
                 _upIndex = _upCommands.Count;
                 _savedTypingCommand = false;
-                _text.text = PopBack(_text.text);
-                string cmd;
-                List<string> args = ParseCommand(_command, out cmd);
-                for (int i = 0; i < args.Count; i++) { //get rid of empty args
-                    if (args[i].Length == 0) {
-                        args.RemoveAt(i);
-                        --i;
-                    }
-                }
-                GameController.Get.Filesys.ReceiveCommand(cmd, args);
+                EnterCommand();
                 _command = "";
             } else if (Input.GetKeyDown(KeyCode.Tab)) {
                 //try to auto complete the last word, space seperated
@@ -144,6 +134,30 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
 
     }
 
+    public void EnterCommand() {
+        _text.text = PopBack(_text.text);
+        string cmd;
+        List<string> args = ParseCommand(_command, out cmd);
+        for (int i = 0; i < args.Count; i++) { //get rid of empty args
+            if (args[i].Length == 0) {
+                args.RemoveAt(i);
+                --i;
+            }
+        }
+        CMDType type = TranslateCMDType(cmd, args.Count);
+        if (type == CMDType.UNKNOWN) {
+            if (GameController.Get.Filesys._guided && GameController.Get.Dialogue.CheckIfCorrect(CMDType.UNKNOWN, cmd)) {
+                GameController.Get.Filesys.AlertCorrectCMD();
+            } else {
+                GameController.Get.Filesys.AlertIncorrectCMD();
+                return;
+            }
+            DisplayError(ErrorMessageType.UnrecognizedCommand, cmd);
+        } else {
+            GameController.Get.Filesys.ReceiveCommand(type, args);
+        }
+    }
+
     public void DisplayError(ErrorMessageType msgType, string cause) {
         string msg = "";
         switch (msgType) {
@@ -191,6 +205,7 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
     public void SetCurrentPath(string p, bool newLine = true) {
         _currentPath = p + "> |";
         if (newLine) _text.text += "\n" + _currentPath;
+        else _text.text = _currentPath;
         ResizeTextbox();
     }
 
@@ -277,8 +292,6 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
     }
 
     private List<string> ParseCommand(string str, out string cmd) {
-        //convert all forward slashes to backslashes
-        str = str.Replace('/', '\\');
         List<string> ls = new List<string>(str.Split(' '));
         cmd = ls[0];
         ls.RemoveAt(0);
@@ -293,9 +306,9 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         _scrollRect.normalizedPosition = Vector2.zero;
     }
 
-    public CMDType TranslateCMDType(string cmd) {
+    public CMDType TranslateCMDType(string cmd, int numArgs) {
         TerminalType type = GameController.Get.TerminalType;
-        if (type == TerminalType.Windows || type == TerminalType.Mac) {
+        if (type == TerminalType.Mac) {
             switch(cmd) {
                 case "cd":
                 return CMDType.CD;
@@ -309,25 +322,25 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
                 case "clear":
                 return CMDType.CLEAR;
 
+                case "python3":
+                return CMDType.PYTHON3;
+
                 default:
                 return CMDType.UNKNOWN;
             }
-        } else {
+        } else { //COMMAND PROMPT
             switch(cmd) {
                 case "cd":
-                return CMDType.CD;
+                return numArgs == 0 ? CMDType.PWD : CMDType.CD; //THIS WON'T WORK IF YOU'RE DOING CD > TEXTFILE LOLOL
                 
                 case "dir":
                 return CMDType.LS;
 
-                //TODO NEED TO HANDLE THE STUPID THING WITH COMMAND PROMPT WHERE
-                //CD EMPTY IS PWD
-
-                // case "cd":
-                // return CMDType.PWD;
-
                 case "cls":
                 return CMDType.CLEAR;
+
+                case "python3":
+                return CMDType.PYTHON3;
 
                 default:
                 return CMDType.UNKNOWN;

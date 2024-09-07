@@ -308,6 +308,10 @@ PrefabInstance:
       propertyPath: CurrentCH
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2636665588853347477, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: TerminalType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2636665588853347487, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_Name
       value: MainCanvas
@@ -339,7 +343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[19].cmd
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[1].text
@@ -422,8 +426,8 @@ PrefabInstance:
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[12].text
       value: You can even step through my file explorer if you would like. I set
-        up shortcuts to my Home directory, my user directory, and my Documents and
-        Downloads directories.
+        up shortcuts to my {Home} directory, the {Users} directory, my user directory
+        {baggu}, and my {Documents} and {Downloads} directories.
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[13].text
@@ -444,7 +448,7 @@ PrefabInstance:
       propertyPath: _dialogues.Array.data[16].text
       value: "That\u2019s right, {C:} represents the {Home} or \u2018{Root}\u2019
         directory. Every folder and file has a path from the {Root} directory to
-        note where it lives.  "
+        note where it lives in the filesystem."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[17].text
@@ -473,7 +477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[22].text
-      value: 'Here, try typing in this command: [clear].'
+      value: 'Here, try typing in this command: [cls].'
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[23].text
@@ -481,7 +485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[24].text
-      value: Yep, [clear] is a useful command, it will erase all the previous text
+      value: Yep, [cls] is a useful command, it will erase all the previous text
         and commands from the terminal and basically reset the view.
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
@@ -626,8 +630,62 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[6].macLinuxText
+      value: 'A directory is just another name for a folder. Just like the folders
+        in your Finder or whatever your File Explorer is called. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[8].macLinuxText
+      value: "Yep, a terminal is really just a text based interface for your machine\u2019s
+        filesystem, just like how your Finder is a visual based interface for the
+        filesystem. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[9].macLinuxText
+      value: 'Woah, so I can go through folders and open files just like my Finder? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[11].macLinuxText
+      value: "Here, we can use my Finder,  it\u2019s currently in a directory called,
+        {baggu}, which is my user folder. Do you know how to get to that folder? "
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[12].macLinuxText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[15].macLinuxText
+      value: ' ..Woah, I see the {Users} and {baggu} folders! Where''s the home directory?'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[16].macLinuxText
+      value: The {Home} or {Root} directory is denoted by the forward slash at the
+        start of the line. Every folder and file has a path from the {Root} directory
+        to note where it lives in the filesystem.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[17].macLinuxText
+      value: "So the {baggu} folder, its path is {Root} then {Users} then {baggu}.
+        We\u2019ll talk more about paths later but it\u2019s important to understand
+        that\u2019s how your files are accessed by the machine. They start at the
+        {Root}, then go down the path to a file/folder. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[18].macLinuxText
+      value: 'I see! So my terminal is really just like the Finder. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[19].tgtINodeName
       value: Hello
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[22].macLinuxText
+      value: 'Here, try typing in this command: [clear].'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[24].macLinuxText
+      value: Yep, [clear] is a useful command, it will erase all the previous text
+        and commands from the terminal and basically reset the view.
       objectReference: {fileID: 0}
     - target: {fileID: 2636665590031873673, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_IsActive

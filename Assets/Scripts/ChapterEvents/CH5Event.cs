@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CH4Event : MonoBehaviour
+public class CH5Event : MonoBehaviour
 {
     public File reporttxt;
     public PopupWindow filledReport;

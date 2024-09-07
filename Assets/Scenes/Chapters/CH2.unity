@@ -312,6 +312,10 @@ PrefabInstance:
       propertyPath: CurrentCH
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2636665588853347477, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: TerminalType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2636665588853347487, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_Name
       value: MainCanvas
@@ -330,11 +334,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.size
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].cmd
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[5].cmd
@@ -354,7 +358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[9].cmd
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[0].text
@@ -366,6 +370,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[11].cmd
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[12].cmd
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
@@ -415,47 +423,49 @@ PrefabInstance:
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].text
       value: 'The terminal works just like that, where it only works in a single
-        directory at a time. You can see the (current working directory) with this
-        command: [pwd]. Try it out!'
+        directory at a time. '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[5].text
-      value: Woah, it printed out more than just the name of the folder though!
+      value: 'You can see the (current working directory) with this command of your
+        terminal with: [cd]. Try it out! Note: On Windows Command Prompt, another
+        important command is also [cd] but with arguments! To only print your current
+        working directory, it''s only just [cd] with no arguments.'
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[6].text
-      value: "That\u2019s right, it prints out the (absolute path) to the {Documents}
-        folder. We\u2019ll talk more about (absolute paths) later. The [pwd] command
-        stands for (Print Working Directory)."
+      value: Woah, it printed out more than just the name of the folder though!
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[7].text
-      value: "You can basically know what folder you\u2019re currently in by looking
-        at the words after the last slashes though"
+      value: "That\u2019s right, it prints out the (absolute path) to the {Documents}
+        folder. We\u2019ll talk more about (absolute paths) later. The [cd] command
+        stands for (Change Directory), which we'll talk about later, but when you
+        don't give it any arguments, it just prints the (current working directory)."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[8].text
+      value: "You can basically know what folder you\u2019re currently in by looking
+        at the words after the last slashes though."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[9].text
       value: "Now that we know our (current working directory), let\u2019s figure
         out what the contents of it are."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[9].text
-      value: 'To (list) the (current working directory) contents, use this command:
-        [ls]. Try it out.'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[10].text
-      value: 'Oh wow, it worked! '
+      value: 'To (list) the (current working directory) contents, use this command:
+        [dir]. Try it out.'
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[11].text
-      value: "Cool isn\u2019t it? [ls] stands for (List). While they seem very basic
-        and not that useful, these are very essential to navigating the terminal."
+      value: 'Oh wow, it worked! '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[12].text
-      value: ' I guess you would start from the {Home} directory, then go to {Users},
-        and then double click on your username folder right? '
+      value: "Cool isn\u2019t it? [dir] stands for (Directory). While they seem very
+        basic and not that useful, these are very essential to navigating the terminal."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[13].text
@@ -518,15 +528,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].isEvent
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[5].isEvent
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[9].isEvent
+      propertyPath: _dialogues.Array.data[5].isEvent
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[9].isEvent
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[0].portrait
@@ -534,7 +544,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[10].isEvent
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[18].isEvent
@@ -582,7 +592,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].hintText
-      value: 'Just type: [pwd].'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].portrait
@@ -590,16 +600,16 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[5].hintText
-      value: 
+      value: 'Just type: [pwd] for Mac/Linux, [cd] for Windows Command Prompt.'
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[5].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[6].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[7].portrait
       value: 
@@ -610,7 +620,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[9].hintText
-      value: 'Just type: [ls].'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[9].portrait
@@ -618,20 +628,20 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[10].hintText
-      value: 
+      value: 'Just type: [ls] for Mac/Linux. [dir] for Windows Command Prompt.'
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[10].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[11].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[12].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[13].portrait
       value: 
@@ -681,12 +691,52 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[2].macLinuxText
+      value: So your Finder, it only shows the contents of a single folder at a time.
+        For example, look at my Finder on the right.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[3].macLinuxText
+      value: 'It is showing the contents of the {Documents} folder. It has 2 subdirectories,
+        and an image file. You would say that the {Documents} is the (current working
+        directory) of the Finder. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].startingPath
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[5].macLinuxText
+      value: 'You can see the (current working directory) with this command of your
+        terminal with: [pwd]. Try it out!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[5].startingPath
       value: \Users\baggu\Documents
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[7].macLinuxText
+      value: "That\u2019s right, it prints out the (absolute path) to the {Documents}
+        folder. We\u2019ll talk more about (absolute paths) later. The [pwd] command
+        stands for (Print Working Directory)."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[9].startingPath
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[10].macLinuxText
+      value: 'To (list) the (current working directory) contents, use this command:
+        [ls]. Try it out.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[10].startingPath
       value: \Users\baggu\Documents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[12].macLinuxText
+      value: "Cool isn\u2019t it? [ls] stands for (List). While they seem very basic
+        and not that useful, these are very essential to navigating the terminal."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665590031873673, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_IsActive
@@ -735,6 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fs: {fileID: 437558486}
+  _titleText: {fileID: 713623479}
 --- !u!114 &437558486 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2636665588853347476, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
@@ -744,6 +795,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1671246f74d7bf343b5ca1d806516856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &713623479 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 122530070918095628, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+  m_PrefabInstance: {fileID: 437558482}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &803013413

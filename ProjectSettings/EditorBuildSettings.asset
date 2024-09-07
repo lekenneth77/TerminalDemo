@@ -21,10 +21,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Chapters/CH3.unity
     guid: 4c8779daec56b5844afa0ed248898657
   - enabled: 1
-    path: Assets/Scenes/Chapters/CH4.unity
+    path: Assets/Scenes/Chapters/CH5.unity
     guid: 1d298518c9bc86045885c31bb165bbb0
   - enabled: 1
-    path: Assets/Scenes/Chapters/CH5.unity
+    path: Assets/Scenes/Chapters/CH6.unity
     guid: 7bc8923401fe1254bbc91d594183eeda
   - enabled: 1
     path: Assets/Scenes/TitleScreen.unity
@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ChapterSelect.unity
     guid: b581d94606f61a04ca6014109736ae43
+  - enabled: 1
+    path: Assets/Scenes/Chapters/CH4.unity
+    guid: d83c7f89df3e3a84896417cdb4ca38eb
   m_configObjects: {}

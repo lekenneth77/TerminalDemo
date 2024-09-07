@@ -12,7 +12,9 @@ using UnityEngine.EventSystems;
 public struct Dialogue {
     public bool isEvent;
      [TextArea(3, 6)]
-    public string text;
+    public string text; //windows command prompt
+     [TextArea(3, 6)]
+    public string macLinuxText; //mac/linux text
     public Sprite portrait;
     public string hintText;
     public CMDType cmd;
@@ -112,8 +114,10 @@ public class DialogueHandler : MonoBehaviour
         }
         _skipText = false;
         _dialogueTextContainer.enabled = true;
+        Dialogue curDialogue = _dialogues[_currDialogueIndex];
+        string currDialogueText = GameController.Get.TerminalType == TerminalType.Mac && curDialogue.macLinuxText.Length != 0 ? 
+            curDialogue.macLinuxText : curDialogue.text;
 
-        string currDialogueText = _dialogues[_currDialogueIndex].text;
         if (numFails >= FAILS_MAX && currDialogue.hintText.Length > 0) {
             currDialogueText += "\n" + currDialogue.hintText;
         }

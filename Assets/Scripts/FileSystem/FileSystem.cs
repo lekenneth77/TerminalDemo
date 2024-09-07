@@ -13,7 +13,7 @@ public class INode {
 
     public void Init(string n, bool isFile = false) {
         name = n;
-        path = "C:";
+        path = GameController.Get.TerminalType == TerminalType.Mac ? "" : "C:";
         file = isFile;
         children = new List<INode>();
         trie = new Trie();
@@ -22,7 +22,8 @@ public class INode {
     public void AddChild(INode node) {
         children.Add(node);
         node.parent = this;
-        node.path = path + "\\" + node.name;
+        string slash = GameController.Get.TerminalType == TerminalType.Mac ? "/" : "\\";
+        node.path = path + slash + node.name;
         trie.AddWord(node.name);
     }
 
@@ -32,20 +33,29 @@ public class FileSystem : MonoBehaviour
 {
     private INode _root;
     private INode _currentNode;
-    private bool _guided;
+    public bool _guided;
     public event Action CorrectCMDReceived;
     public event Action IncorrectCMDReceived;
     private TerminalTextHandler terminal;
 
+    //jank alert
+    public void AlertCorrectCMD() {
+        CorrectCMDReceived?.Invoke();
+    }
+
+    public void AlertIncorrectCMD() {
+        IncorrectCMDReceived?.Invoke();
+    }
+
 
     void Awake()
     {
-        CreateFilesys();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        CreateFilesys();
         terminal = GameController.Get.Terminal;
         terminal.Init(_currentNode.path);
     }
@@ -55,35 +65,35 @@ public class FileSystem : MonoBehaviour
         _guided = isGuided;
     }
 
-    public void ReceiveCommand(string command, List<string> args) {
+    public void ReceiveCommand(CMDType command, List<string> args) {
         switch (command) {
-            case "cd":
+            case CMDType.CD:
             if (args.Count != 1) {
-                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "cd");
                 break;
             }
             ChangeDirectory(args[0]);
             break;
 
-            case "ls":
+            case CMDType.LS:
             if (args.Count != 0) {
-                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "ls");
                 break;
             }
             List();
             break;
 
-            case "pwd":
+            case CMDType.PWD:
             if (args.Count != 0) {
-                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "pwd");
                 break;
             }
             PrintWorkingDirectory();
             break;
 
-            case "clear":
+            case CMDType.CLEAR:
             if (args.Count != 0) {
-                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "clear");
                 if (_guided) {IncorrectCMDReceived?.Invoke();}
                 break;
             }
@@ -94,25 +104,13 @@ public class FileSystem : MonoBehaviour
             terminal.ClearTerminal();
             break;
 
-            case "python3":
+            case CMDType.PYTHON3:
             if (args.Count == 0) {
-                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, command);
+                terminal.DisplayError(ErrorMessageType.InvalidNumberOfArgs, "python3");
                 if (_guided) {IncorrectCMDReceived?.Invoke();}
                 break;
             }
             Python(args);
-            break;
-
-            default:
-            if (_guided) {
-                if (GameController.Get.Dialogue.CheckIfCorrect(CMDType.UNKNOWN, command)) {
-                    CorrectCMDReceived?.Invoke();
-                } else {
-                    IncorrectCMDReceived?.Invoke();
-                    return;
-                }
-            }
-            terminal.DisplayError(ErrorMessageType.UnrecognizedCommand, command);
             break;
         }
     }
@@ -181,6 +179,7 @@ public class FileSystem : MonoBehaviour
     }
 
     public void ForceCD(string absolutePath) {
+        absolutePath = absolutePath.Replace('/', '\\');
         absolutePath = absolutePath.Substring(1, absolutePath.Length - 1); //remove that first backslash
         string[] dirs = absolutePath.Split('\\');
         INode result = CDHelper(_root, _root, dirs[dirs.Length - 1], dirs, 0);
@@ -244,12 +243,15 @@ public class FileSystem : MonoBehaviour
     }
 
     private INode GetINode(string path) {
-        bool isAbsolute = path[0] == '\\';
+        TerminalType termType = GameController.Get.TerminalType;
+        if (termType == TerminalType.Windows) {path = path.Replace('/', '\\');};
+        char slash = termType == TerminalType.Windows ? '\\' : '/';
+        bool isAbsolute = path[0] == slash;
         INode startingNode = isAbsolute ? _root : _currentNode;
         if (isAbsolute) {
             path = path.Substring(1, path.Length - 1); //remove that first backslash
         }
-        string[] dirs = path.Split('\\');
+        string[] dirs = path.Split(slash);
         INode result = CDHelper(startingNode, startingNode, dirs[dirs.Length - 1], dirs, 0);
         return result;
     }
@@ -288,12 +290,14 @@ public class FileSystem : MonoBehaviour
     }
 
     public void AutocompletePath(string path) {
-        bool isAbsolute = path[0] == '\\';
+        TerminalType termType = GameController.Get.TerminalType;
+        char slash = termType == TerminalType.Windows ? '\\' : '/';
+        bool isAbsolute = path[0] == slash;
         INode startingNode = isAbsolute ? _root : _currentNode;
         if (isAbsolute) {
             path = path.Substring(1, path.Length - 1); //remove that first backslash
         }
-        string[] dirs = path.Split("\\");
+        string[] dirs = path.Split(slash);
         string[] poppedDirs = dirs.Take(dirs.Length - 1).ToArray();
         INode result = dirs.Length > 1 ? CDHelper(startingNode, startingNode, dirs[dirs.Length - 2], poppedDirs, 0) : startingNode; //i feel like this might cause a bug in the future
         if (result == null) {
@@ -315,9 +319,10 @@ public class FileSystem : MonoBehaviour
             autocompletedirs.Add(ls[0]);
             string autocompletedpath = "";
             foreach (string s in autocompletedirs) {
-                autocompletedpath += s + '\\';
+                autocompletedpath += s + slash;
             }
             autocompletedpath = autocompletedpath.Substring(0, autocompletedpath.Length - 1); //AHAHAHAHA FENCE POST
+            if (isAbsolute) {autocompletedpath = slash + autocompletedpath;}
             terminal.TextTabAutoComplete(autocompletedpath);
         } else {
             //we have many results, print them all out, then go to a new line with the same command!

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,43 +6,42 @@ public class TerminalTypeSelector : MonoBehaviour
 {
     [SerializeField] private Button _windowsButton;
     [SerializeField] private Button _macButton;
-    [SerializeField] private Button _linuxButton;
     [SerializeField] private Sprite _unselectedSprite;
     [SerializeField] private Sprite _selectedSprite;
 
     // Start is called before the first frame update
     void Start()
     {
-        _windowsButton.onClick.AddListener(() => UpdateAllButtons(TerminalType.Windows));
-        _macButton.onClick.AddListener(() => UpdateAllButtons(TerminalType.Mac));
-        _linuxButton.onClick.AddListener(() => UpdateAllButtons(TerminalType.Linux));
+        _windowsButton.onClick.AddListener(() => UpdateAllButtons(0));
+        _macButton.onClick.AddListener(() => UpdateAllButtons(1));
 
         GetComponent<CanvasGroup>().alpha = 0;
-        UpdateAllButtons(TerminalType.Windows);
+
+        UpdateAllButtons((int)TerminalTypeSingleton.Get.terminalType);
         var seq = DOTween.Sequence();
         seq.AppendInterval(0.5f);
         seq.Append(GetComponent<CanvasGroup>().DOFade(1, 1f));
         seq.Play();
     }
 
-    private void UpdateAllButtons(TerminalType type) {
-        switch (type) {
-            case TerminalType.Windows:
+    private void UpdateAllButtons(int i) {
+        switch (i) {
+            case 0:
+                TerminalTypeSingleton.Get.SetTerminalType(TerminalType.Windows);
                 ChangeButtonImage(_windowsButton, _selectedSprite);
                 ChangeButtonImage(_macButton, _unselectedSprite);
-                ChangeButtonImage(_linuxButton, _unselectedSprite);
             break;
 
-            case TerminalType.Mac:
+            case 1:
+                TerminalTypeSingleton.Get.SetTerminalType(TerminalType.Mac);
                 ChangeButtonImage(_windowsButton, _unselectedSprite);
                 ChangeButtonImage(_macButton, _selectedSprite);
-                ChangeButtonImage(_linuxButton, _unselectedSprite);
             break;
 
-            case TerminalType.Linux:
+            case 2:
+                TerminalTypeSingleton.Get.SetTerminalType(TerminalType.Mac);
                 ChangeButtonImage(_windowsButton, _unselectedSprite);
                 ChangeButtonImage(_macButton, _unselectedSprite);
-                ChangeButtonImage(_linuxButton, _selectedSprite);
             break;
         }
     }

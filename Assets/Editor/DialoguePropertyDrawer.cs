@@ -11,13 +11,13 @@ public class DialoguePropertyDrawer : PropertyDrawer
         // Find the properties
         var isEventProperty = property.FindPropertyRelative("isEvent");
         var textProperty = property.FindPropertyRelative("text");
+        var alternateTextProperty = property.FindPropertyRelative("macLinuxText"); // The alternate text field
         var portraitProperty = property.FindPropertyRelative("portrait");
         var hintTextProperty = property.FindPropertyRelative("hintText");
         var cmdProperty = property.FindPropertyRelative("cmd");
         var startingPathProperty = property.FindPropertyRelative("startingPath");
         var tgtINodeName = property.FindPropertyRelative("tgtINodeName");
         var redirectTgt = property.FindPropertyRelative("redirectTgt");
-
 
         // Calculate rects
         var lineHeight = EditorGUIUtility.singleLineHeight;
@@ -34,12 +34,16 @@ public class DialoguePropertyDrawer : PropertyDrawer
         EditorGUI.PropertyField(new Rect(currentPos.x, currentPos.y, position.width, textAreaHeight), textProperty, new GUIContent("Text"));
         currentPos.y += textAreaHeight + EditorGUIUtility.standardVerticalSpacing;
 
+        // Draw the alternate text field
+        EditorGUI.PropertyField(new Rect(currentPos.x, currentPos.y, position.width, textAreaHeight), alternateTextProperty, new GUIContent("Alternate Text"));
+        currentPos.y += textAreaHeight + EditorGUIUtility.standardVerticalSpacing;
+
         // Draw portrait field
         currentPos.height = lineHeight;
         EditorGUI.PropertyField(currentPos, portraitProperty);
         currentPos.y += lineHeight + EditorGUIUtility.standardVerticalSpacing;
 
-        // Conditionally show cmd, hintText, tgtPath, and startingPath based on isEvent value
+        // Conditionally show cmd, hintText, startingPath, tgtINodeName, redirectTgt based on isEvent value
         if (isEventProperty.boolValue)
         {
             EditorGUI.PropertyField(currentPos, cmdProperty);
@@ -60,12 +64,12 @@ public class DialoguePropertyDrawer : PropertyDrawer
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
         var isEventProperty = property.FindPropertyRelative("isEvent");
-        var height = EditorGUIUtility.singleLineHeight * 3; // Base height for isEvent, text, and portrait
-        height += EditorGUIUtility.singleLineHeight * 4 + EditorGUIUtility.standardVerticalSpacing; // Text area height
+        var height = EditorGUIUtility.singleLineHeight * 4; // Base height for isEvent, text, alternateText, and portrait
+        height += EditorGUIUtility.singleLineHeight * 7 + EditorGUIUtility.standardVerticalSpacing * 2; // Text area height
 
         if (isEventProperty.boolValue)
         {
-            height += EditorGUIUtility.singleLineHeight * 5 + EditorGUIUtility.standardVerticalSpacing * 3; // cmd, hintText, tgtPath, startingPath
+            height += EditorGUIUtility.singleLineHeight * 5 + EditorGUIUtility.standardVerticalSpacing * 5; // cmd, hintText, startingPath, tgtINodeName, redirectTgt
         }
 
         return height;

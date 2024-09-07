@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.Rendering;
 using UnityEngine.SceneManagement;
 
 public class ChapterSelect : MonoBehaviour
 {
     private const string PATH_THING = "ChapterSelect> ";
     private const string LS_TEXT = "ls";
+    private const string DIR_TEXT = "dir";
     private const float LETTER_DELAY = 0.2f;
     [SerializeField] private TextMeshProUGUI _terminalText; 
     [SerializeField] private List<Button> _chapterButtons;
@@ -29,8 +29,13 @@ public class ChapterSelect : MonoBehaviour
             int id = i;
             _chapterButtons[i].onClick.AddListener(() => LoadChapter(id));
         }
+        TerminalTypeSingleton.Get.ChangedType += UpdateListCommand;
 
         StartCoroutine("ShowLS");
+    }
+
+    void OnDestroy() {
+        TerminalTypeSingleton.Get.ChangedType -= UpdateListCommand;
     }
 
     void Update()
@@ -38,6 +43,11 @@ public class ChapterSelect : MonoBehaviour
         if (_animate) {
             AnimateButtons();
         }
+    }
+
+    private void UpdateListCommand() {
+        var type = TerminalTypeSingleton.Get.terminalType;
+        _terminalText.text = PATH_THING + (type == TerminalType.Mac ? LS_TEXT : DIR_TEXT);
     }
 
     private void LoadChapter(int chID) {
@@ -48,8 +58,9 @@ public class ChapterSelect : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         _terminalText.text = _terminalText.text.Insert(PATH_THING.Length, "_");
         yield return new WaitForSeconds(LETTER_DELAY);
-        for (int i = 0; i < LS_TEXT.Length; i++) {
-            _terminalText.text = _terminalText.text.Insert(i + PATH_THING.Length, "" + LS_TEXT[i]);
+        string text = TerminalTypeSingleton.Get.terminalType == TerminalType.Windows ? DIR_TEXT : LS_TEXT;
+        for (int i = 0; i < text.Length; i++) {
+            _terminalText.text = _terminalText.text.Insert(i + PATH_THING.Length, "" + text[i]);
             yield return new WaitForSeconds(LETTER_DELAY);
         }
         _terminalText.text = _terminalText.text.Substring(0, _terminalText.text.Length - 1);
