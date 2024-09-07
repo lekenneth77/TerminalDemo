@@ -449,7 +449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[2].text
-      value: Now let's run [ls].
+      value: Now let's run [dir].
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[30].cmd
@@ -725,7 +725,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[1].hintText
-      value: 'The command is: [cd Documents\PythonScripts].'
+      value: 'The command is: [cd Documents\PythonScripts] for Windows Command Prompt.
+        [cd Documents/PythonScripts] for Mac/Linux.'
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[1].portrait
@@ -1170,6 +1171,10 @@ PrefabInstance:
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[29].redirectTgt
       value: <days.txt
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[2].macLinuxText
+      value: Now let's run [ls].
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[2].startingPath
