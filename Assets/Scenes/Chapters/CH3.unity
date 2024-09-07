@@ -326,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.size
-      value: 36
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].cmd
@@ -431,7 +431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[37].cmd
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[3].text
@@ -578,52 +578,71 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[29].text
-      value: Awesome, [cd] back into to the {Downloads} folder for me.
+      value: Awesome, we're back in the {baggu} directory now. Let's [cd] back into
+        the {Downloads} folder.
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[30].text
-      value: "Let\u2019s say we wanted to go to my {Documents} directory from my
-        {Downloads} directory, here you could use the (absolute path) to go there,
-        but let\u2019s try using the (relative path). You can put the [..] keyword
-        anywhere in your path to really make navigating the terminal easy."
+      value: So you can put the [..] keyword anywhere in your path to really make
+        navigating the terminal easy.
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].text
-      value: The (relative path) in words is, go back up to the parent folder {baggu}
-        then go to {Documents}. Try writing the simplest [cd] command to do that.
-        Remember to go back to the parent the path keyword is [..] .
+      value: 'For example, you can do stuff like [..\..] to go back up two directories!
+        Imagine [..] just being the name or keyword in a path meaning to go back
+        to your parent directory! '
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[32].text
+      value: What if I typed in this command [cd ..\Downloads]? Is that valid? If
+        so, where does it lead?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[33].text
+      value: We're currently working in the {Downloads} directory, so the path [..\Downloads]
+        means, first go back up to my parent directory which is {baggu}, and then
+        I go to the {Downloads} directory which is valid because it's a subdirectory
+        of {baggu}. So, I'm just back where I started?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[34].text
+      value: 'Yep! That''s right, I like how you stepped through the path to see
+        if it''s valid or not. That''s the best way to figure out if the path is
+        valid or not. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[35].text
+      value: "Let\u2019s say we wanted to go to my {Documents} directory from my
+        {Downloads} directory, here you could use the (absolute path) to go there,
+        but let\u2019s try using the (relative path)."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[36].text
+      value: The (relative path) in words is, go back up to the parent folder {baggu}
+        then go to {Documents}. Try writing a single [cd] command to do that. Remember
+        to go back to the parent the path keyword is [..] .
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[37].text
       value: "Great job, you\u2019re a [cd] pro now. So alongside the [..] path keyword,
         there is also the [.] keyword."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[33].text
+      propertyPath: _dialogues.Array.data[38].text
       value: "The [.] keyword (single period) represents the (current working directory).
         It\u2019s not that useful with [cd] but it can be useful when some programs
         use root as the default starting point, but using the [.] keyword as your
         starting point is a good way to emulate (relative paths)."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[34].text
+      propertyPath: _dialogues.Array.data[39].text
       value: "So saying something like [cd .] is gonna just move you to the same
         directory you\u2019re already in.\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[35].text
+      propertyPath: _dialogues.Array.data[40].text
       value: "That\u2019s all there is about [cd], make sure to remember your absolute
         and relative paths and the difference between them! "
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[36].text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
-      propertyPath: _dialogues.Array.data[37].text
-      value: "The really nice thing about that, is if I\u2019m trying to move to
-        a directory that is close to my current working one, then it makes it very
-        simple."
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[0].isEvent
@@ -775,7 +794,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].isEvent
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].tgtPath
@@ -798,12 +817,24 @@ PrefabInstance:
       value: ..\Documents
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[34].isEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[34].tgtPath
       value: ..\Documents
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[35].isEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[35].tgtPath
       value: ..\Documents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[36].isEvent
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[36].tgtPath
@@ -972,8 +1003,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].hintText
-      value: The command is [cd ..\Documents] for Windows Command Prompt. [cd ../Documents]
-        for Mac/Linux
+      value: The command is [cd Downloads].
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].portrait
@@ -994,7 +1024,7 @@ PrefabInstance:
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[33].portrait
       value: 
-      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[34].hintText
       value: The command is [cd Downloads].
@@ -1013,7 +1043,8 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[36].hintText
-      value: The command is [cd Downloads].
+      value: The command is [cd ..\Documents] for Windows Command Prompt. [cd ../Documents]
+        for Mac/Linux
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[36].portrait
@@ -1021,10 +1052,34 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[37].hintText
-      value: 
+      value: The command is [cd Downloads].
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[37].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[38].hintText
+      value: The command is [cd Downloads].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[38].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[39].hintText
+      value: The command is [cd Downloads].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[39].portrait
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[40].hintText
+      value: The command is [cd Downloads].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[40].portrait
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
@@ -1139,11 +1194,69 @@ PrefabInstance:
       value: Downloads
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[31].macLinuxText
+      value: 'For example, you can do stuff like [../..] to go back up two directories!
+        Imagine [..] just being the name or keyword in a path meaning to go back
+        to your parent directory! '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].startingPath
-      value: \Users\baggu\Downloads
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[31].tgtINodeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[32].macLinuxText
+      value: What if I typed in this command [cd ../Downloads]? Is that valid? If
+        so, where does it lead?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[32].startingPath
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[32].tgtINodeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[33].macLinuxText
+      value: We're currently working in the {Downloads} directory, so the path [../Downloads]
+        means, first go back up to my parent directory which is {baggu}, and then
+        I go to the {Downloads} directory which is valid because it's a subdirectory
+        of {baggu}. So, I'm just back where I started?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[33].startingPath
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[33].tgtINodeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[34].startingPath
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[34].tgtINodeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[35].startingPath
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[35].tgtINodeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[36].startingPath
+      value: \Users\baggu\Downloads
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[36].tgtINodeName
       value: Documents
       objectReference: {fileID: 0}
     - target: {fileID: 2636665590031873673, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
