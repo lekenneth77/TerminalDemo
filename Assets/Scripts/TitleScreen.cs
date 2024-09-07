@@ -30,9 +30,13 @@ public class TitleScreen : MonoBehaviour
     }
     void Start()
     {
+        if (LoadingScreen.Get) {
+            Destroy(LoadingScreen.Get.gameObject);
+        }
         if (HasSeenTitleScreen) {
             ShowButtons();
         } else {
+            HasSeenTitleScreen = true;
             StartCoroutine("TypeTitleOut");
         }
     }
@@ -61,7 +65,6 @@ public class TitleScreen : MonoBehaviour
     }
 
     public void StartGame() {
-        var seq = DOTween.Sequence();
         _numbersGroup.DOFade(0, 2f);
         StartCoroutine("GoToChapterSelect");
     }

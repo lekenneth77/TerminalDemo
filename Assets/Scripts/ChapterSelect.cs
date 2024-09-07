@@ -16,16 +16,25 @@ public class ChapterSelect : MonoBehaviour
     [SerializeField] private List<Button> _chapterButtons;
     [SerializeField] private List<RectTransform> _chapterLerps;
     [SerializeField] private GameObject _vacuum;
+    [SerializeField] private Button _titleScreenButton;
+    [SerializeField] private TerminalTypeSelector _typeSelector;
     private Vector2 _startingPos;
     private bool _animate = false;
     public float animSpeed = 5f;
     private float _animLerp = 0;
+    private bool _doneAnimation = false;
+    private bool _goingTitleScreen = false;
 
     // Start is called before the first frame update
     void Start()
     {
         _terminalText.text = PATH_THING;
         _startingPos = _chapterButtons[0].GetComponent<RectTransform>().anchoredPosition;
+        _doneAnimation = false;
+
+        if (BackgroundColor.Get) {
+            Destroy(BackgroundColor.Get.gameObject);
+        }
 
         for (int i = 0; i < _chapterButtons.Count; i++) {
             int id = i;
@@ -41,6 +50,14 @@ public class ChapterSelect : MonoBehaviour
             seq.AppendCallback(() => StartCoroutine("ShowLS"));
             seq.Play();
         }
+
+        _titleScreenButton.onClick.AddListener(GoToTitleScreen);
+        CanvasGroup titleScreenBtnGrp = _titleScreenButton.GetComponent<CanvasGroup>();
+        titleScreenBtnGrp.alpha = 0;
+        var sequence = DOTween.Sequence();
+        sequence.AppendInterval(0.5f);
+        sequence.Append(titleScreenBtnGrp.DOFade(1, 1f));
+        sequence.Play();
     }
 
     void OnDestroy() {
@@ -50,8 +67,40 @@ public class ChapterSelect : MonoBehaviour
     void Update()
     {
         if (_animate) {
-            AnimateButtons();
+            AnimateButtons(!_goingTitleScreen);
         }
+    }
+
+    private void GoToTitleScreen() {
+        if (!_doneAnimation) {return;}
+        _goingTitleScreen = true;
+        
+        StartCoroutine("GoTitleScreenAnimation");
+    }
+
+    private IEnumerator GoTitleScreenAnimation() {
+        _terminalText.text = PATH_THING;
+        yield return new WaitForSeconds(0.1f);
+        _terminalText.text = _terminalText.text.Insert(PATH_THING.Length, "_");
+        yield return new WaitForSeconds(LETTER_DELAY);
+        string text = "cd ..";
+        for (int i = 0; i < text.Length; i++) {
+            _terminalText.text = _terminalText.text.Insert(i + PATH_THING.Length, "" + text[i]);
+            yield return new WaitForSeconds(LETTER_DELAY);
+        }
+        _terminalText.text = _terminalText.text.Substring(0, _terminalText.text.Length - 1);
+        yield return new WaitForSeconds(0.1f);
+        CanvasGroup titleScreenBtnGrp = _titleScreenButton.GetComponent<CanvasGroup>();
+        CanvasGroup selectorGrp = _typeSelector.GetComponent<CanvasGroup>();
+        titleScreenBtnGrp.alpha = 1;
+        selectorGrp.alpha = 1;
+        var sequence = DOTween.Sequence();
+        sequence.Append(titleScreenBtnGrp.DOFade(0, 0.25f));
+        sequence.Join(selectorGrp.DOFade(0, 0.25f));
+        sequence.AppendInterval(0.3f);
+        sequence.OnComplete(() => {SceneManager.LoadSceneAsync("TitleScreen");});
+        sequence.Play();
+        _animate = true;
     }
 
     private void UpdateListCommand() {
@@ -60,6 +109,7 @@ public class ChapterSelect : MonoBehaviour
     }
 
     private void LoadChapter(int chID) {
+        if (_goingTitleScreen) {return;}
         _vacuum.SetActive(true);
         string name = "CH" + chID;
         LoadingScreen.Get.AnimateIn(name);
@@ -77,19 +127,32 @@ public class ChapterSelect : MonoBehaviour
         _terminalText.text = _terminalText.text.Substring(0, _terminalText.text.Length - 1);
         yield return new WaitForSeconds(0.1f);
         _animate = true;
+        _doneAnimation = true;
     }
 
-    private void AnimateButtons() {
-        for (int i = 0; i < _chapterButtons.Count; i++) {
-            var tgtPos = _chapterLerps[i].anchoredPosition;
-            var lerpPos = Vector2.Lerp(_startingPos, tgtPos, _animLerp);
-            _chapterButtons[i].GetComponent<RectTransform>().anchoredPosition = lerpPos;
+    private void AnimateButtons(bool goingToTgt) {
+        if (goingToTgt) {
+            for (int i = 0; i < _chapterButtons.Count; i++) {
+                var tgtPos = _chapterLerps[i].anchoredPosition;
+                var lerpPos = Vector2.Lerp(_startingPos, tgtPos, _animLerp);
+                _chapterButtons[i].GetComponent<RectTransform>().anchoredPosition = lerpPos;
+            }
+        } else {
+            for (int i = 0; i < _chapterButtons.Count; i++) {
+                var tgtPos = _chapterLerps[i].anchoredPosition;
+                var lerpPos = Vector2.Lerp(tgtPos, _startingPos, _animLerp);
+                _chapterButtons[i].GetComponent<RectTransform>().anchoredPosition = lerpPos;
+            }
         }
-
 
         _animLerp += animSpeed * Time.deltaTime;
         if (_animLerp > 1) {
             _animate = false;
+            _animLerp = 0;
+
+            if (!goingToTgt) {
+                //
+            }
         }
     }
 }
