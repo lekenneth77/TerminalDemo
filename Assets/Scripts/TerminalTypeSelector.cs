@@ -8,11 +8,24 @@ public class TerminalTypeSelector : MonoBehaviour
     [SerializeField] private Button _macButton;
     [SerializeField] private Sprite _unselectedSprite;
     [SerializeField] private Sprite _selectedSprite;
+    [SerializeField] private PopupWindow _windowsPopup;
+    [SerializeField] private Transform _popupContainer;
+    [SerializeField] private GameObject _vacuum;
+    public static bool SeenWindowsPopup = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        _windowsButton.onClick.AddListener(() => UpdateAllButtons(0));
+        _windowsButton.onClick.AddListener(() => {
+            UpdateAllButtons(0);
+            if (!SeenWindowsPopup) {
+                SeenWindowsPopup = true;
+                GameObject popup = Instantiate(_windowsPopup.gameObject, _popupContainer);
+                _vacuum.SetActive(true);
+                popup.GetComponent<PopupWindow>().OnDismiss += DisableVacuum;
+                popup.GetComponent<PopupWindow>().Show();
+            }
+        });
         _macButton.onClick.AddListener(() => UpdateAllButtons(1));
 
         GetComponent<CanvasGroup>().alpha = 0;
@@ -22,6 +35,10 @@ public class TerminalTypeSelector : MonoBehaviour
         seq.AppendInterval(0.5f);
         seq.Append(GetComponent<CanvasGroup>().DOFade(1, 1f));
         seq.Play();
+    }
+
+    private void DisableVacuum() {
+        _vacuum.SetActive(false);
     }
 
     private void UpdateAllButtons(int i) {
