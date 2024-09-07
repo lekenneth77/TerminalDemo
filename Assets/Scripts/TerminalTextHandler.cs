@@ -78,8 +78,10 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
                     _text.text = PopBack(_text.text);
                     _text.text = PushBack(_text.text, "|");
                     _command = PopBack(_command);
+                    ResizeTextbox();
                 }
             } else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) {
+                if (_upCommands.Count > 100) {_upCommands.Clear();}
                 _upCommands.Add(_command); //push command
                 _upIndex = _upCommands.Count;
                 _savedTypingCommand = false;
@@ -102,6 +104,7 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
                     _text.text = _text.text.Substring(0, _text.text.Length - lastLine.Length);
                     _text.text += PopBack(_currentPath) + PushBack(_upCommands[_upIndex], "|");
                     _command = _upCommands[_upIndex];
+                    ResizeTextbox();
                 }
 
             } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
@@ -112,12 +115,14 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
                     _text.text = _text.text.Substring(0, _text.text.Length - lastLine.Length);
                     _text.text += PopBack(_currentPath) + PushBack(_upCommands[_upIndex], "|");
                     _command = _upCommands[_upIndex];
+                    ResizeTextbox();
                 } else {
                     //go back down to the typing line, need to use the saved copy if we've done that
                     string lastLine = GetLastLine(_text.text);
                     _text.text = _text.text.Substring(0, _text.text.Length - lastLine.Length);
                     if(_savedTypingCommand) _command = _commandCopy;
                     _text.text += PopBack(_currentPath) + PushBack(_command, "|");
+                    ResizeTextbox();
                 }
 
             } else if (Input.inputString != "") {
@@ -299,6 +304,10 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
     }
 
     private void ResizeTextbox() {
+        if (_text.text.Length > 1000) {
+            ClearTerminal();
+            return;
+        }
         _text.ForceMeshUpdate();
         float textHeight = _text.GetRenderedValues(false).y;
         float textWidth = _text.transform.parent.GetComponent<RectTransform>().sizeDelta.x;
