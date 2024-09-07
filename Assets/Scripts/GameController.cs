@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
 
     public bool Debug = false;
     public bool Paused = false;
+    public bool AnimDone = false;
 
     void Awake()
     {
@@ -47,14 +48,19 @@ public class GameController : MonoBehaviour
         
         titleFadeIn.alpha = 0;
         var sequence = DOTween.Sequence();
-        sequence.AppendInterval(0.5f);
+        if (LoadingScreen.Get) {
+            sequence.AppendCallback(() => LoadingScreen.Get.Dismiss());
+        }
+        sequence.AppendInterval(1.5f);
         sequence.Append(titleFadeIn.DOFade(1, TITLE_ANIM_DURATION));
         sequence.AppendInterval(TITLE_HOW_LONG);
         sequence.Append(titleFadeIn.DOFade(0, TITLE_ANIM_DURATION));
         sequence.AppendInterval(0.5f);
         sequence.AppendCallback(() => titleFadeIn.gameObject.SetActive(false));
         sequence.AppendCallback(Dialogue.StartDialogue);
+        sequence.OnComplete(() => AnimDone = true);
         sequence.Play();
+
     }
 
     

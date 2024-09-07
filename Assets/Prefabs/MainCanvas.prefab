@@ -541,6 +541,7 @@ MonoBehaviour:
   CurrentCH: 0
   Debug: 0
   Paused: 0
+  AnimDone: 0
 --- !u!114 &2636665588853347476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,6 +1024,7 @@ MonoBehaviour:
   _text: {fileID: 2636665589143590411}
   _scrollRect: {fileID: 2636665588885455061}
   _vacuum: {fileID: 2636665590031873673}
+  isInit: 0
 --- !u!225 &1124067636506679172
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1053,7 +1055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2636665589545537007
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1220,6 +1222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e234cc950e302da4faff820c2dcc81f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainContainer: {fileID: 2636665589716542606}
   _container: {fileID: 2636665588358480002}
   _textField: {fileID: 2636665590259244283}
   _dialogues: []

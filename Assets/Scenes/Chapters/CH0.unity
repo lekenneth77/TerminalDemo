@@ -212,10 +212,14 @@ PrefabInstance:
       propertyPath: m_fontStyle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2636665588358480000, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2dd2939c53d07e14bbdf1064f66c49d7, type: 3}
     - target: {fileID: 2636665588820547013, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: beb6e44b3f6281d42b765ac35a8c6e01, type: 3}
     - target: {fileID: 2636665588853347472, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -318,6 +322,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589218843871, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542606, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}

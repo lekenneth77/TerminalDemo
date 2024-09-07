@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 
 [Serializable]
@@ -25,6 +26,7 @@ public struct Dialogue {
 
 public class DialogueHandler : MonoBehaviour
 {
+    [SerializeField] private CanvasGroup _mainContainer;
     [SerializeField] private CanvasGroup _container;
     [SerializeField] private TextMeshProUGUI _textField;
     [SerializeField] private List<Dialogue> _dialogues;
@@ -88,7 +90,11 @@ public class DialogueHandler : MonoBehaviour
 
     public void StartDialogue()
     {
-        NextDialogue();        
+        if (GameController.Get.CurrentCH == 0) {
+            ShowDialogue();
+        } else {
+            NextDialogue();        
+        }
     }
 
     public void NextDialogue()
@@ -100,6 +106,7 @@ public class DialogueHandler : MonoBehaviour
         } else {
             int nextCH = GameController.Get.CurrentCH + 1;
             if (nextCH > 6) {
+                DismissDialogue();
                 //go to title screen?
             } else {
                 SceneManager.LoadSceneAsync("CH" + nextCH);
@@ -227,15 +234,25 @@ public class DialogueHandler : MonoBehaviour
         _advanceButton.gameObject.SetActive(false);
     }
 
-    // public void DismissDialogue()
-    // {
-    //     _container.alpha = 1;
-    //     var sequence = DOTween.Sequence();
-    //     sequence.Append(_container.DOFade(0, FADE_OUT));
-    //     sequence.AppendInterval(0.25f);
-    //     sequence.AppendCallback(() => _container.gameObject.SetActive(false));
-    //     sequence.Play(); 
-    // }
+    public void DismissDialogue()
+    {
+        _mainContainer.alpha = 1;
+        var sequence = DOTween.Sequence();
+        sequence.Append(_mainContainer.DOFade(0, 2f));
+        sequence.AppendInterval(0.25f);
+        sequence.AppendCallback(() => _mainContainer.gameObject.SetActive(false));
+        sequence.OnComplete(() => {LoadingScreen.Get.AnimateIn("ChapterSelect");});
+        sequence.Play(); 
+    }
+
+    public void ShowDialogue() 
+    {
+        _mainContainer.alpha = 0;
+        var seq = DOTween.Sequence();
+        seq.Append(_mainContainer.DOFade(1, 1.5f));
+        seq.OnComplete(NextDialogue);
+        seq.Play();
+    }
 
     public bool CheckIfCorrect(CMDType type, string inodeName, string redirectTgtName = "") {
         if (type == _tgtCmd && inodeName == _tgtINode) {

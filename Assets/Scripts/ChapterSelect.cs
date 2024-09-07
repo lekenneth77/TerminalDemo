@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class ChapterSelect : MonoBehaviour
 {
@@ -30,8 +31,15 @@ public class ChapterSelect : MonoBehaviour
             _chapterButtons[i].onClick.AddListener(() => LoadChapter(id));
         }
         TerminalTypeSingleton.Get.ChangedType += UpdateListCommand;
-
-        StartCoroutine("ShowLS");
+        if (LoadingScreen.Get.dismissed) {
+            StartCoroutine("ShowLS");
+        } else {
+            var seq = DOTween.Sequence();
+            seq.AppendCallback(() => LoadingScreen.Get.Dismiss());
+            seq.AppendInterval(0.25f);
+            seq.AppendCallback(() => StartCoroutine("ShowLS"));
+            seq.Play();
+        }
     }
 
     void OnDestroy() {
@@ -51,7 +59,8 @@ public class ChapterSelect : MonoBehaviour
     }
 
     private void LoadChapter(int chID) {
-        SceneManager.LoadSceneAsync("CH" + chID);
+        string name = "CH" + chID;
+        LoadingScreen.Get.AnimateIn(name);
     }
 
     private IEnumerator ShowLS() {

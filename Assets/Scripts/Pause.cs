@@ -22,10 +22,12 @@ public class Pause : MonoBehaviour
     }
 
     private void GoToChpterSelect() {
-        SceneManager.LoadSceneAsync("ChapterSelect");
+        Time.timeScale = 1;
+        LoadingScreen.Get.AnimateIn("ChapterSelect");
     }
 
     private void TogglePause() {
+        if (!GameController.Get || !GameController.Get.AnimDone) {return;}
         if (isShowing) {
             GetComponent<CanvasGroup>().alpha = 0;
             goToChpterSeelct.gameObject.SetActive(false);

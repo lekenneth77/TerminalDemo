@@ -37,6 +37,7 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
     private InputController ic;
     private List<string> _upCommands = new List<string>();
     private int _upIndex = 0;
+    public bool isInit = false;
     //TODO ADD A LIMIT TO COMMAND AND LIST/STACK PUSHES
 
     void Awake()
@@ -50,6 +51,7 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         ResizeTextbox();
         ic = new InputController();
         ic.Keyboard.AddCallbacks(this);
+        isInit = true;
     }
 
     public void EnableKeyboard() {
