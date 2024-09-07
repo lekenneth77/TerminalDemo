@@ -31,6 +31,7 @@ public class DialogueHandler : MonoBehaviour
     [SerializeField] private Button _advanceButton;
     [SerializeField] private Button _dialogueTextContainer;
     [SerializeField] private Image _portraitImg;
+    [SerializeField] private Image _dialogueImg;
     // [SerializeField] private Toggle _autoToggle;
     private int _currDialogueIndex = 0;
     private float LETTER_DELAY = 0.03f;
@@ -48,6 +49,13 @@ public class DialogueHandler : MonoBehaviour
     private Dictionary<char, string> specialCharMap = new Dictionary<char, string>();
     private const string COLOR_TAG_ENDER = "</color>";
     private bool _skipText = false;
+    public CheckmarkAnim CheckAnim;
+    public Sprite crabPortrait;
+    public Sprite bagguPortrait;
+    public Sprite redGradient;
+    public Sprite yellowGradient;
+
+
     
     // Start is called before the first frame update
     void Start()
@@ -104,6 +112,7 @@ public class DialogueHandler : MonoBehaviour
         _textField.text = "";
         Dialogue currDialogue = _dialogues[_currDialogueIndex];
         _portraitImg.sprite = currDialogue.portrait;
+        _dialogueImg.sprite = currDialogue.portrait == bagguPortrait ? yellowGradient : redGradient;
 
         if (currDialogue.isEvent && numFails == 0) {
             terminal.SetVacuumView(true);
@@ -114,9 +123,8 @@ public class DialogueHandler : MonoBehaviour
         }
         _skipText = false;
         _dialogueTextContainer.enabled = true;
-        Dialogue curDialogue = _dialogues[_currDialogueIndex];
-        string currDialogueText = GameController.Get.TerminalType == TerminalType.Mac && curDialogue.macLinuxText.Length != 0 ? 
-            curDialogue.macLinuxText : curDialogue.text;
+        string currDialogueText = GameController.Get.TerminalType == TerminalType.Mac && currDialogue.macLinuxText.Length != 0 ? 
+            currDialogue.macLinuxText : currDialogue.text;
 
         if (numFails >= FAILS_MAX && currDialogue.hintText.Length > 0) {
             currDialogueText += "\n" + currDialogue.hintText;
@@ -168,6 +176,7 @@ public class DialogueHandler : MonoBehaviour
     private void DisplayCorrectDialogue() {
         filesys.SetGuidedMode(false);
         terminal.SetVacuumView(true);
+        CheckAnim.AnimateCheckmark();
         StopAllCoroutines();
         numFails = 0;
         _currDialogueIndex++;
