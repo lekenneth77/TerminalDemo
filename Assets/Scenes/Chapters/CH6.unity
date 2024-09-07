@@ -326,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].cmd
@@ -457,13 +457,11 @@ PrefabInstance:
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[3].text
       value: "i write code not dialogue, hope this terminal demo was helpful to anyone
-        though. Prof. Baggu out. Thanks for playing!\r"
+        though. Thanks for playing!\r"
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].text
-      value: "So first, let\u2019s learn how to run the python script in the terminal,
-        and it\u2019s simple, the command is simply [python3 <path>]. Again, the
-        arrows aren\u2019t included."
+      value: ' Professor Baggu out.'
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[5].text
@@ -864,7 +862,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].hintText
-      value: 'The command is: [cd Documents\PythonScripts].'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].portrait
@@ -1176,11 +1174,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].startingPath
-      value: \Users\baggu
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[4].tgtINodeName
-      value: PythonScripts
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[5].startingPath

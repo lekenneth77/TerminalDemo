@@ -211,8 +211,8 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
 
     public void SetCurrentPath(string p, bool newLine = true) {
         _currentPath = p + "> |";
-        if (newLine) _text.text += "\n" + _currentPath;
-        else _text.text = _currentPath;
+        if (newLine) {_text.text += "\n" + _currentPath;}
+        else {_text.text = _currentPath;}
         ResizeTextbox();
     }
 

@@ -926,6 +926,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}
     - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
+      propertyPath: _dialogues.Array.data[23].hintText
+      value: For Mac/Linux, the absolute path would be [/Users/baggu]. For Windows
+        CMDPrompt, the absolute path would be [\Users\baggu].
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636665589716542607, guid: 1e5fd73b8b04e8744b0ebba20158c556, type: 3}
       propertyPath: _dialogues.Array.data[23].portrait
       value: 
       objectReference: {fileID: 21300000, guid: 3fe9a075da2dfee4f8b2004790442919, type: 3}

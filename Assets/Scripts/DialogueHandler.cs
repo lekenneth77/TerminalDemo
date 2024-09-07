@@ -116,6 +116,7 @@ public class DialogueHandler : MonoBehaviour
 
     private IEnumerator DisplayCurrentDialogue()
     {
+        yield return null;
         _textField.text = "";
         Dialogue currDialogue = _dialogues[_currDialogueIndex];
         _portraitImg.sprite = currDialogue.portrait;
@@ -133,10 +134,6 @@ public class DialogueHandler : MonoBehaviour
         string currDialogueText = GameController.Get.TerminalType == TerminalType.Mac && currDialogue.macLinuxText.Length != 0 ? 
             currDialogue.macLinuxText : currDialogue.text;
 
-        if (numFails >= FAILS_MAX && currDialogue.hintText.Length > 0) {
-            currDialogueText += "\n" + currDialogue.hintText;
-        }
-        
         bool specialText = false;
         for (int i = 0; i < currDialogueText.Length; i++) {
             char curChar = currDialogueText[i];
@@ -183,6 +180,7 @@ public class DialogueHandler : MonoBehaviour
     private void DisplayCorrectDialogue() {
         filesys.SetGuidedMode(false);
         terminal.SetVacuumView(true);
+        _advanceButton.gameObject.SetActive(false);
         CheckAnim.AnimateCheckmark();
         StopAllCoroutines();
         numFails = 0;
@@ -206,11 +204,19 @@ public class DialogueHandler : MonoBehaviour
             break;
 
             case CMDType.PWD:
-            incorrText += "it should just be pwd, and that's it! No spaces or words after!";
+            if (GameController.Get.TerminalType == TerminalType.Mac) {
+                incorrText += "it should just be pwd, and that's it! No spaces or words after!";
+            } else {
+                incorrText += "it should just be cd, and that's it! No spaces or words after!";
+            }
             break;
 
             case CMDType.LS:
-            incorrText += "it should just be ls, and that's it! No spaces or words after!";
+            if (GameController.Get.TerminalType == TerminalType.Mac) {
+                incorrText += "it should just be ls, and that's it! No spaces or words after!";
+            } else {
+                incorrText += "it should just be dir, and that's it! No spaces or words after!";
+            }
             break;
 
             default:
@@ -219,8 +225,38 @@ public class DialogueHandler : MonoBehaviour
         }
         for (int i = 0; i < incorrText.Length; i++) {
             _textField.text += incorrText[i];
-            yield return new WaitForSeconds(LETTER_DELAY / 2f);
-        }   
+            yield return new WaitForSeconds(0);
+        }  
+
+        Dialogue currDialogue = _dialogues[_currDialogueIndex];
+        if (numFails >= FAILS_MAX && currDialogue.hintText.Length > 0) {
+            _textField.text += " ";
+            string currDialogueText = currDialogue.hintText;
+            bool specialText = false;
+            for (int i = 0; i < currDialogueText.Length; i++) {
+                char curChar = currDialogueText[i];
+                if (specialCharMap.ContainsKey(curChar)) {
+                    _textField.text += specialCharMap[curChar];
+                    specialText = true;
+                    _textField.text += COLOR_TAG_ENDER;
+                } else if (curChar == ']' || curChar == ')' || curChar == '}') {
+                    specialText = false;
+                } else {
+                    if (specialText) {
+                        _textField.text = _textField.text.Substring(0, _textField.text.Length - COLOR_TAG_ENDER.Length);
+                    }
+                    
+                    _textField.text += currDialogueText[i];
+                    
+                    if (specialText) {
+                        _textField.text += COLOR_TAG_ENDER;
+                    }
+                }
+                
+                yield return new WaitForSeconds(0);
+            }        
+        }
+        
         yield return new WaitForSeconds(1f);
         _advanceButton.gameObject.SetActive(true);
     }
