@@ -27,6 +27,10 @@ public class INode {
         trie.AddWord(node.name);
     }
 
+    public int NumChildren() {
+        return children.Count;
+    }
+
 }
 
 public class FileSystem : MonoBehaviour
