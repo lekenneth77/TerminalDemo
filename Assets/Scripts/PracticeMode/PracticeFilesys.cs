@@ -6,20 +6,28 @@ using UnityEngine;
 public class PracticeFilesys : MonoBehaviour
 {
     private INode _root;
-    private const int MAX_INODES_IN_DIR = 4;
+    private const int MAX_INODES_IN_DIR = 2;
     private List<INode> dirs;
     private List<INode> pythonScripts;
     private List<INode> textFiles;
+
+    void Awake()
+    {
+    }
 
     // Start is called before the first frame update
     void Start()
     {
     }
 
+    public INode GetRoot() {
+        return _root;
+    }
+
     public void CreateRandomFilesys(GameMode mode) {
         switch(mode) {
             case GameMode.EASYCD:
-
+            GenerateFS(3, 12, 2, 4);
             break;
 
             case GameMode.HARDCD:

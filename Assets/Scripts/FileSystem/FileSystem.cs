@@ -10,10 +10,13 @@ public class INode {
     public INode parent;
     public bool file = false;
     public Trie trie;
+    public float x;
+    public float y;
 
     public void Init(string n, bool isFile = false) {
         name = n;
-        path = GameController.Get.TerminalType == TerminalType.Mac ? "" : "C:";
+        path = "";
+        if (GameController.Get) path = GameController.Get.TerminalType == TerminalType.Mac ? "" : "C:";
         file = isFile;
         children = new List<INode>();
         trie = new Trie();
@@ -22,7 +25,8 @@ public class INode {
     public void AddChild(INode node) {
         children.Add(node);
         node.parent = this;
-        string slash = GameController.Get.TerminalType == TerminalType.Mac ? "/" : "\\";
+        string slash = "/";
+        if (GameController.Get) slash = GameController.Get.TerminalType == TerminalType.Mac ? "/" : "\\";
         node.path = path + slash + node.name;
         trie.AddWord(node.name);
     }

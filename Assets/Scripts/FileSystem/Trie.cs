@@ -17,7 +17,7 @@ public class Trie
 
     public void AddWord(string word) {
         string traversalWord = word;
-        if (GameController.Get.TerminalType == TerminalType.Windows) {traversalWord = word.ToLower();}
+        if (GameController.Get && GameController.Get.TerminalType == TerminalType.Windows) {traversalWord = word.ToLower();}
         AddHelper(root, traversalWord, word, 0);
     }
 
@@ -38,13 +38,13 @@ public class Trie
     }
 
     public bool DoesWordExist(string word) {
-        if (GameController.Get.TerminalType == TerminalType.Windows) {word = word.ToLower();}
+        if (GameController.Get && GameController.Get.TerminalType == TerminalType.Windows) {word = word.ToLower();}
         TrieNode result = FindHelper(root, word, 0);
         return result != null && result.isWord;
     }
 
     public List<string> GetWordsWithPrefix(string prefix) {
-        if (GameController.Get.TerminalType == TerminalType.Windows) {prefix = prefix.ToLower();}
+        if (GameController.Get && GameController.Get.TerminalType == TerminalType.Windows) {prefix = prefix.ToLower();}
         TrieNode result = FindHelper(root, prefix, 0);
         if (result == null) {
             return new List<string>();
