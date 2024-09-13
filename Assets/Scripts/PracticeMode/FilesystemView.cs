@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,23 +11,24 @@ public class FilesystemView : MonoBehaviour
     [SerializeField] private PracticeFilesys _filesys;
     [SerializeField] private INodeView _inodeViewFab;
     [SerializeField] private Button _regenerateButton;
-    /*
-    The cool algorithm:
-    https://www.codeproject.com/Articles/5290521/Drawing-a-Tree
+    [SerializeField] private RectTransform _moveToTrans;
+    [SerializeField] private CanvasGroup _terminalGrp;
+    private const float SCALE_DOWN = 0.6f;
+    private const float ANIM_DURATION = 2f;
 
-    1) Put each inode into their own row
-    2) Starting from the bottom of the tree, put the parent in the same row as their first child
-    3) Delete empty rows
-    4) Recursively center the parent based on their children
-    So basically, to represent "rows", we're going to use a list of stack of inodes
-
-    */
     // Start is called before the first frame update
     void Start()
     {
         _regenerateButton.onClick.AddListener(Regenerate);
         _filesys.CreateRandomFilesys(GameMode.EASYCD);
         DrawFilesys();
+
+        var seq = DOTween.Sequence();
+        seq.AppendInterval(3f);
+        seq.Append(_container.DOScale(SCALE_DOWN, ANIM_DURATION));
+        seq.Join(_container.DOAnchorPosY(_moveToTrans.anchoredPosition.y, ANIM_DURATION));
+        seq.Join(_terminalGrp.DOFade(1, ANIM_DURATION));
+        seq.Play();
     }
 
     private void Regenerate()
@@ -87,21 +89,6 @@ public class FilesystemView : MonoBehaviour
         }
         return curNodeView;
     }
-
-    private List<INode> GetFlatTree(INode root) {
-        Queue<INode> bfs = new Queue<INode>();
-        List<INode> ls = new List<INode>(); 
-        bfs.Enqueue(root);
-        while (bfs.Count > 0) {
-            INode node = bfs.Dequeue();
-            ls.Add(node);
-            foreach (INode child in node.children) {
-                bfs.Enqueue(child);
-            }
-        }
-        return ls;
-    }
-
     private Dictionary<INode, int> GetDepthMap(INode root) {
         Dictionary<INode, int> depthMap = new Dictionary<INode, int>();
         Queue<INode> bfs = new Queue<INode>();
@@ -141,42 +128,5 @@ public class FilesystemView : MonoBehaviour
             }
         }
     }
-
-    private int GetMaxDepth(INode root) {
-        return MaxDepthHelper(root, 0);
-    }
-
-    private int MaxDepthHelper(INode curNode, int depth) {
-        if (curNode == null) {
-            return depth;
-        }
-
-        int maxDepth = depth;
-        foreach (INode child in curNode.children) {
-            maxDepth = Math.Max(maxDepth, MaxDepthHelper(child, depth + 1));
-        }
-        return maxDepth;
-    }
-
-    private int GetMaxWidth(INode root) {
-        if (root == null) {
-            return 0;
-        }
-
-        Queue<INode> nodeQ = new Queue<INode>();
-        nodeQ.Enqueue(root);
-        int maxWidth = 0;
-        while (nodeQ.Count > 0) {
-            int curWidth = nodeQ.Count; 
-            maxWidth = Math.Max(curWidth, maxWidth);
-
-            INode curNode = nodeQ.Dequeue();
-            foreach (INode child in curNode.children) {
-                nodeQ.Enqueue(child);
-            }
-        }
-        return maxWidth;
-    }
-
   
 }
