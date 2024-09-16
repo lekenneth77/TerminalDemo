@@ -1,33 +1,17 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
-public enum ErrorMessageType {
-    UnrecognizedCommand,
-    PathNotFound,
-    InvalidNumberOfArgs,
-    FileNotDirectory,
-    DirectoryNotFile,
-    NotValidFile,
-    InvalidArguments
-}
-
-public enum CMDType {
-    CD,
-    PWD,
-    LS,
-    CLEAR,
-    PYTHON3,
-    UNKNOWN
-}
-
-public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActions
+//essentailly a copy of the TerminalTextHandler class, but I wanted to separate them out so that I don't have to make too many
+//jank changes to the original class and break the normal game.
+public class PracticeTerminal : MonoBehaviour, InputController.IKeyboardActions
 {
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private ScrollRect _scrollRect;
     [SerializeField] private GameObject _vacuum;
+
     private string _currentPath = "";
     private string _command = "";
     private string _commandCopy = ""; //USED TO SAVE STATE FOR DOWN ARROW KEY
@@ -36,14 +20,12 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
     private List<string> _upCommands = new List<string>();
     private int _upIndex = 0;
     public bool isInit = false;
-    //TODO ADD A LIMIT TO COMMAND AND LIST/STACK PUSHES
-
     void Awake()
     {
         _text.text = "";
     }
 
-    public void Init(string path) {
+     public void Init(string path) {
         _text.text = path + "> |";
         _currentPath = _text.text;
         ResizeTextbox();
@@ -56,20 +38,13 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         ic.Keyboard.Enable();
     }
 
-    private void OnDestroy()
-    {
+    private void OnDestroy() {
         StopAllCoroutines();
-    }
-
-    public void SetVacuumView(bool view) {
-        _vacuum.SetActive(view);
-        if (view) {ic.Keyboard.Disable();}
-        else {ic.Keyboard.Enable();}
     }
 
     public void OnKeyboardPress(InputAction.CallbackContext context)
     {
-        if (!this || _vacuum.activeInHierarchy || GameController.Get.Paused) {return;}
+        if (!this || _vacuum.activeInHierarchy || GameController.Get.Paused || !isInit) {return;}
        
         if (context.performed) {
             if (Input.GetKeyDown(KeyCode.Backspace)) {
@@ -90,7 +65,7 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
             } else if (Input.GetKeyDown(KeyCode.Tab)) {
                 //try to auto complete the last word, space seperated
                 string lastWord = GetLastWord(_command);
-                GameController.Get.Filesys.AutocompletePath(lastWord);
+                Practice.Get.Filesys.AutocompletePath(lastWord);
             } else if (Input.GetKeyDown(KeyCode.UpArrow)) {
                 if (_upIndex > 0) --_upIndex;
                 if (_upIndex >= 0 && _upIndex < _upCommands.Count) {
@@ -151,15 +126,9 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
         }
         CMDType type = TranslateCMDType(cmd, args.Count);
         if (type == CMDType.UNKNOWN) {
-            if (GameController.Get.Filesys._guided && GameController.Get.Dialogue.CheckIfCorrect(CMDType.UNKNOWN, cmd)) {
-                GameController.Get.Filesys.AlertCorrectCMD();
-            } else {
-                GameController.Get.Filesys.AlertIncorrectCMD();
-                return;
-            }
             DisplayError(ErrorMessageType.UnrecognizedCommand, cmd);
         } else {
-            GameController.Get.Filesys.ReceiveCommand(type, args);
+            Practice.Get.Filesys.ReceiveCommand(type, args);
         }
     }
 
@@ -360,5 +329,4 @@ public class TerminalTextHandler : MonoBehaviour, InputController.IKeyboardActio
             }
         }
     }
-
 }

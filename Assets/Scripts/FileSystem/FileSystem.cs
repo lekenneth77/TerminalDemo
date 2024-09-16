@@ -7,7 +7,7 @@ public class INode {
     public string name;
     public string path;
     public List<INode> children;
-    public INode parent;
+    public INode parent = null;
     public bool file = false;
     public Trie trie;
     public float x;
